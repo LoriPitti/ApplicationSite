@@ -1,0 +1,67 @@
+.container-fluid{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 3vh;
+}
+.col{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.option{
+  border-color: darkgrey;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 0.5vh;
+  width: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  padding: 0;
+  transition: 0.5s ease-out;
+}
+.option:hover{
+  cursor: pointer;
+  transform: scale(1.1);
+  background-color: orange;
+}
+h2
+{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  font-size: 3vh;
+  height: 100%;
+  margin-bottom: 0;
+  padding-left: 6vh;
+}
+.icon{
+  width: 6vh;
+}
+.col-2{
+}
+
+.col-8{
+  justify-content: left;
+  margin-left: 2vh;
+}
+
+.div-addUSer:hover{
+  cursor: pointer;
+
+}
+.icon{
+  transition: color 0.5s ease;
+}
+.div-addUSer:hover .icon{
+  color: orange;
+}

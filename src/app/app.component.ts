@@ -1,4 +1,16 @@
 import { Component } from '@angular/core';
+import {IconSetService} from "@coreui/icons-angular";
+import {
+  cilAccountLogout,
+  cilActionUndo,
+  cilApps, cilCheckCircle,
+  cilChevronCircleRightAlt,
+  cilEducation,
+  cilFindInPage,
+  cilIndustry,
+  cilUser, cilUserPlus, cilWarning, cilXCircle
+} from "@coreui/icons";
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +19,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ApplicationsMenager';
+
+  constructor(public iconSet:IconSetService) {
+    iconSet.icons = {cilEducation, cilUser, cilIndustry, cilActionUndo,cilChevronCircleRightAlt,cilApps,cilFindInPage,
+      cilAccountLogout, cilUserPlus,cilCheckCircle, cilXCircle, cilWarning}
+  }
 }

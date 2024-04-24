@@ -1,0 +1,34 @@
+<div class="container-fluid body">
+<div class="row div-central">
+  <div class="col menu col-2" >
+    <div class="row r-menu">
+      <div class="div-icon" (click)="goTo('myapplication')">
+        <svg cIcon name="cilApps" size="sm" class="icon" id="appIcon"></svg>
+      </div>
+    </div>
+    <div class="row r-menu">
+      <div class="div-icon">
+        <svg cIcon name="cilFindInPage" size="sm" class="icon" id="findIcon"></svg>
+      </div>
+    </div>
+    <div class="row r-menu">
+      <div class="div-icon" (click)="goTo('profile')">
+        <svg cIcon name="cilUser" size="sm" class="icon" id="personalIcon"></svg>
+      </div>
+    </div>
+    <div class="row r-menu r-logout">
+      <div class="div-icon" (click)="openDialog('0ms', '0ms')">
+        <svg cIcon name="cilAccountLogout" size="sm" class="icon" id="logout"></svg>
+      </div>
+    </div>
+  </div>
+  <div class="col content">
+    <div class="row r-header">
+      <app-header [title]="title"></app-header>
+    </div>
+    <div class="container-fluid router">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+</div>

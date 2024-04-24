@@ -1,0 +1,17 @@
+.container-fluid{
+/*border-color: red;
+  border-style: solid;
+  border-width: medium;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 6vh;
+  width: 90vw;
+}
+.container{
+  width: 60vh
+}
+
+.row{
+  margin-top: 4vh;
+}

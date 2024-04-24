@@ -1,0 +1,88 @@
+.container-fluid{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container{
+  border-color: orange;
+  border-style: solid;
+  border-width: medium;
+  border-radius: 0.5vh;
+  width: 40vh;
+  padding: 3vh;
+}
+.row{
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-bottom: 2vh;
+}
+.col{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.div-icon{
+  background-color: white;
+  width: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1vh;
+  margin-top: -6vh;
+  margin-left: -6vh;
+}
+.icon{
+  width: 6vh;
+}
+
+.div-undo{
+  position: fixed;
+  align-self: end;
+  left: 5vh;
+  bottom: 5vh;
+  transition: 1s ease;
+}
+.div-undo:hover{
+  transform: rotate(45deg);
+  cursor: pointer;
+}
+.div-undo:hover .icon-undo{
+  color: orange;
+}
+.icon-undo{
+  width: 5vh;
+  transition: color 0.5s;
+}
+
+.r-enter{
+  justify-self: center;
+  display: flex;
+  align-self: center;
+  margin-top: -2vh;
+}
+.div-enter{
+  width: 8vh;
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  transition: 0.5s ease-out;
+}
+
+.div-enter:hover{
+  transform: scale(1.1);
+  cursor: pointer;
+}
+.icon-enter{
+  transition: color 0.5s ease-out;
+}
+.div-enter:hover .icon-enter{
+  color: orange;
+}
+
+
+
+
+

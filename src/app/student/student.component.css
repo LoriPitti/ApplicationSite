@@ -1,0 +1,58 @@
+.body{
+  height: 100vh;
+
+}
+.col{
+  height: 100vh;
+  padding: 0;
+  max-width: 10vh;
+}
+.menu{
+  background-color: orange;
+}
+.r-menu{
+  margin-top: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon{
+  width: 4vh;
+}
+.div-icon{
+  width: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s ease;
+}
+
+.div-icon:hover{
+  cursor: pointer;
+  transform: scale(1.2);
+}
+.row{
+  padding: 0;
+}
+.icon{
+  transition: color 0.5s ease-out;
+}
+.div-icon:hover .icon{
+  color: white;
+}
+.r-logout{
+  margin-top: 50vh;
+}
+
+.r-header{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 5vh;
+  padding: 0;
+}
+
+.router{
+  padding:0;
+  margin-top: 5vh;
+}

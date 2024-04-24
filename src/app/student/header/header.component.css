@@ -1,0 +1,28 @@
+
+.container-fluid{
+}
+.navbar{
+  width: 80vw;
+  padding-left: 10vh;
+  height: 6vh;
+}
+
+.div-user{
+  background-color: grey;
+  border-radius: 0.5vh;
+  width: 30vh;
+  height: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 2vh;
+  align-self: end;
+}
+li{
+  margin-top: 3vh;
+}
+
+ul{
+  padding-bottom: 3vh;
+}

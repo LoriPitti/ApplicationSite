@@ -1,0 +1,94 @@
+<div class="container-fluid">
+
+  <div class="container-fluid">
+    <div class="container">
+      <div class="div-icon">
+        <svg  cIcon name="cilUserPlus" size="sm" class="icon"></svg>
+      </div>
+      <div class="row">
+        <div class="col">
+          <h2>Registrati nel portale</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Email di ateneo</mat-label>
+            <input matInput
+                   placeholder="pat@example.com"
+                [formControl]="email"
+                   (blur)="updateErrorMessage()"
+                   required>
+            @if (email.invalid) {
+              <mat-error>{{errorMessage}}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Nome </mat-label>
+            <input class="input" matInput placeholder="Nome ">
+            <mat-error>{{nameInvalid}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Cognome </mat-label>
+            <input class="input" matInput placeholder="Cognome ">
+            <mat-error>{{nameInvalid}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Matricola </mat-label>
+            <input class="input" matInput placeholder="Matricola ">
+            <mat-error>{{nameInvalid}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Conferma matricola </mat-label>
+            <input class="input" matInput placeholder="Conferma matricola ">
+            <mat-error>{{nameInvalid}}</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Conferma password</mat-label>
+            <input matInput [type]="hide2 ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+              <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+
+          </mat-form-field>
+        </div>
+      </div>
+
+      </div>
+  </div>
+  <div class="div-undo" (click)="backToHome()">
+    <svg  cIcon name="cilActionUndo" size="sm" class="icon icon-undo" ></svg>
+  </div>
+</div>
