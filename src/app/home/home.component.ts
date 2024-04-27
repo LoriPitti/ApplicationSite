@@ -19,8 +19,8 @@ export class HomeComponent {
       case "university":
         param = 'university';
         break;
-      case "industry":
-        param = 'industry';
+      case "management":
+        param = 'management';
         break;
       default:
         break;

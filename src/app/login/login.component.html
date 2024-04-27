@@ -3,20 +3,26 @@
     <div class="div-icon">
       <svg *ngIf="type==='university'" cIcon name="cilEducation" size="sm" class="icon"></svg>
       <svg *ngIf="type==='student'" cIcon name="cilUser" size="sm" class="icon"></svg>
-      <svg *ngIf="type==='industry'" cIcon name="cilIndustry" size="sm" class="icon"></svg>
+      <svg *ngIf="type==='management'" cIcon name="cilBarChart" size="sm" class="icon"></svg>
     </div>
     <div class="row">
       <div class="col">
-        <h2>Accedi nell'area personale</h2>
+        <h2 *ngIf="type!='management'">Accedi nell'area personale</h2>
+        <h2 *ngIf="type==='management'">Area riservata agli amministratori</h2>
       </div>
     </div>
     <div class="row">
      <div class="col">
        <mat-form-field appearance="outline">
          <mat-label>Nome utente</mat-label>
-         <input class="input" matInput placeholder="Nome utente">
-         <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-         <mat-error>{{userError}}</mat-error>
+         <input class="input" matInput placeholder="Nome utente"
+         [formControl]="user"
+         (blur)="updateErrorMessageUser()"
+         required>
+         <mat-icon matSuffix>person</mat-icon>
+         @if(user.invalid){
+           <mat-error>{{errorMessageUser}}</mat-error>
+         }
        </mat-form-field>
      </div>
     </div>
@@ -24,16 +30,22 @@
       <div class="col">
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'">
+          <input matInput [type]="hide ? 'password' : 'text'"
+          [formControl]="password"
+          (blur)="errorMessagePassword"
+          required>
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
             <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button>
-          <mat-error>{{pswError}}</mat-error>
+          @if(password.invalid){
+            <mat-error>{{errorMessagePassword}}</mat-error>
+          }
+
         </mat-form-field>
       </div>
     </div>
     <div class="row r-enter">
-        <div *ngIf="valid" class="div-enter"  (click)="login()">
+        <div *ngIf="!user.invalid && !password.invalid" class="div-enter"  (click)="login()">
           <svg  cIcon name="cilChevronCircleRightAlt" size="sm" class="icon icon-enter" ></svg>
         </div>
 

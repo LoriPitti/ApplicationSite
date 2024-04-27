@@ -1,28 +1,17 @@
-
-.container-fluid{
+.navbar-brand{
+    font-size: 3vh;
 }
-.navbar{
-  width: 80vw;
-  padding-left: 10vh;
-  height: 6vh;
+.nav-link{
+  font-size: 2vh;
 }
 
-.div-user{
+.username{
   background-color: grey;
   border-radius: 0.5vh;
-  width: 30vh;
-  height: 4vh;
-  display: flex;
+  width: 20vh;
   justify-content: center;
-  align-items: center;
-  color: white;
-  font-size: 2vh;
-  align-self: end;
-}
-li{
-  margin-top: 3vh;
-}
+  display: flex;
+  align-self: center;
+  justify-self: end;
 
-ul{
-  padding-bottom: 3vh;
 }

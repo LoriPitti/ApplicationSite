@@ -12,15 +12,29 @@
       </div>
       <div class="row">
         <div class="col">
+          <mat-form-field appearance="outline">
+            <mat-label>Nome utente</mat-label>
+            <input class="input" matInput placeholder="Nome utente"
+                   [formControl]="user"
+                   (blur)="updateErrorMessageUser()"
+                   required>
+            @if (name.invalid){
+              <mat-error>{{errorMessageUser}}</mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
           <mat-form-field>
             <mat-label>Email di ateneo</mat-label>
             <input matInput
                    placeholder="pat@example.com"
                 [formControl]="email"
-                   (blur)="updateErrorMessage()"
+                   (blur)="updateErrorMessageEmail()"
                    required>
             @if (email.invalid) {
-              <mat-error>{{errorMessage}}</mat-error>
+              <mat-error>{{errorMessageEmail}}</mat-error>
             }
           </mat-form-field>
         </div>
@@ -28,36 +42,42 @@
       <div class="row">
         <div class="col">
           <mat-form-field appearance="outline">
-            <mat-label>Nome </mat-label>
-            <input class="input" matInput placeholder="Nome ">
-            <mat-error>{{nameInvalid}}</mat-error>
+            <mat-label>Nome</mat-label>
+            <input class="input" matInput placeholder="Nome"
+            [formControl]="name"
+            (blur)="updateErrorMessageName()"
+            required>
+            @if (name.invalid){
+              <mat-error>{{errorMessageName}}</mat-error>
+            }
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <mat-form-field appearance="outline">
-            <mat-label>Cognome </mat-label>
-            <input class="input" matInput placeholder="Cognome ">
-            <mat-error>{{nameInvalid}}</mat-error>
+            <mat-label>Cognome</mat-label>
+            <input class="input" matInput placeholder="Cognome"
+            [formControl]="surname"
+            (blur)="updateErrorMessageSurname()"
+            required>
+            @if(surname.invalid){
+              <mat-error>{{errorMessageSurname}}</mat-error>
+            }
+
           </mat-form-field>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <mat-form-field appearance="outline">
-            <mat-label>Matricola </mat-label>
-            <input class="input" matInput placeholder="Matricola ">
-            <mat-error>{{nameInvalid}}</mat-error>
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <mat-form-field appearance="outline">
-            <mat-label>Conferma matricola </mat-label>
-            <input class="input" matInput placeholder="Conferma matricola ">
-            <mat-error>{{nameInvalid}}</mat-error>
+            <mat-label>Matricola</mat-label>
+            <input class="input" matInput placeholder="Matricola"
+            [formControl]="matricola"
+            (blur)="updateErrorMessageMatricola()">
+            @if(matricola.invalid){
+              <mat-error>{{errorMessageMatricola}}</mat-error>
+            }
           </mat-form-field>
         </div>
       </div>
@@ -65,11 +85,16 @@
         <div class="col">
           <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'">
+            <input matInput [type]="hide ? 'password' : 'text'"
+            [formControl]="password"
+            (blur)="updateErrorMessagePassword()"
+            required>
             <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
               <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-
+            @if (password.invalid){
+              <mat-error>{{errorMessagePassword}}</mat-error>
+            }
           </mat-form-field>
         </div>
       </div>
@@ -77,12 +102,25 @@
         <div class="col">
           <mat-form-field appearance="outline">
             <mat-label>Conferma password</mat-label>
-            <input matInput [type]="hide2 ? 'password' : 'text'">
+            <input matInput [type]="hide2 ? 'password' : 'text'"
+            [formControl]="password2"
+            (blur)="updateErrorMessagePassword2()"
+            required>
             <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
               <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-
+            @if(password2.invalid){
+              <mat-error>{{errorMessagePassword2}}</mat-error>
+            }
           </mat-form-field>
+        </div>
+      </div>
+      <div class="row r-confirm">
+        <div class="col">
+          <div class="div-confirm" *ngIf="!user.invalid && !email.invalid && !name.invalid && !surname.invalid && !password.invalid && !password2.invalid && !matricola.invalid "
+               (click)="confirm()">
+            <svg  cIcon name="cilChevronCircleRightAlt" size="sm" class="icon" id="confirm"></svg>
+          </div>
         </div>
       </div>
 

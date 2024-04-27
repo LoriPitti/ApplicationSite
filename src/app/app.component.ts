@@ -3,7 +3,7 @@ import {IconSetService} from "@coreui/icons-angular";
 import {
   cilAccountLogout,
   cilActionUndo,
-  cilApps, cilCheckCircle,
+  cilApps, cilBarChart, cilCheckCircle,
   cilChevronCircleRightAlt,
   cilEducation,
   cilFindInPage,
@@ -22,6 +22,6 @@ export class AppComponent {
 
   constructor(public iconSet:IconSetService) {
     iconSet.icons = {cilEducation, cilUser, cilIndustry, cilActionUndo,cilChevronCircleRightAlt,cilApps,cilFindInPage,
-      cilAccountLogout, cilUserPlus,cilCheckCircle, cilXCircle, cilWarning}
+      cilAccountLogout, cilUserPlus,cilCheckCircle, cilXCircle, cilWarning, cilBarChart}
   }
 }

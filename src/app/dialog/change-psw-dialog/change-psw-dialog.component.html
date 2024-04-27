@@ -1,0 +1,62 @@
+<h2 mat-dialog-title>Cambia password</h2>
+<mat-dialog-content>
+  Digita la vecchia password
+  <div class="div">
+    <mat-form-field appearance="outline">
+      <mat-label>Password</mat-label>
+      <input matInput [type]="hide ? 'password' : 'text'"
+             [formControl]="password"
+             (blur)="errorMessagePassword"
+             required>
+      <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
+      @if(password.invalid){
+        <mat-error>{{errorMessagePassword}}</mat-error>
+      }
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <div class="col">
+      Nuova password
+      <div class="div">
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hide2 ? 'password' : 'text'"
+                 [formControl]="passwordNew"
+                 (blur)="updateErrorMessagePasswordNew()"
+                 required>
+          <button mat-icon-button matSuffix (click)="hide2 = !hide2" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide2">
+            <mat-icon>{{hide2 ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          @if (passwordNew.invalid){
+            <mat-error>{{errorMessagePasswordNew}}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col">
+      Conferma password
+      <div class="div">
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'"
+                 [formControl]="passwordConfirm"
+                 (blur)="updateErrorMessagePasswordConfirm()"
+                 required>
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          @if (passwordConfirm.invalid){
+            <mat-error>{{errorMessagePasswordConfirm}}</mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="abort()">Annulla</button>
+  <button mat-button mat-dialog-close cdkFocusInitial *ngIf="!password.invalid && !passwordConfirm.invalid && !passwordNew.invalid" (click)="changePassword()" >Cambia password</button>
+</mat-dialog-actions>
+

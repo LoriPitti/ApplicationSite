@@ -1,32 +1,90 @@
 <div class="container-fluid">
-<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title><h2>{{nome}} {{cognome}}</h2></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{mail}}</p>
+      <p>{{matr}}</p>
+      <p></p>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="col">
+        <button class="btn" mat-button (click)="modify()" [disabled]="modifyEnabled">Modifica</button>
+      </div>
+      <div class="col">
+        <button class="btn" mat-button (click)="changePassword()" [disabled]="modifyEnabled">Cambia password</button>
+      </div>
+      <div class="col">
+          <button mat-button class="btn btl-delete" [disabled]="modifyEnabled">Elimina</button>
+      </div>
+
+    </mat-card-actions>
+  </mat-card>
+  <br>
+</div>
+<div class="container-fluid" *ngIf="modifyEnabled">
   <div class="row">
-    <div class="col">
+    <div class="col c-btn">
+      <button type="button" class="btn" (click)="abort()">Annulla</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col ">
       <mat-form-field appearance="outline">
         <mat-label>Nome </mat-label>
-        <input class="input" [(ngModel)]="nome "  [disabled]="disabled" matInput placeholder="Nome ">
+        <input class="input"  matInput placeholder="Nome "
+        [formControl]="name"
+        (blur)="updateErrorMessageName()"
+        required>
+        @if(name.invalid){
+          <mat-error>{{errorMessageName}}</mat-error>
+        }
       </mat-form-field>
     </div>
     <div class="col">
       <mat-form-field appearance="outline">
         <mat-label>Cognome</mat-label>
-        <input class="input" [(ngModel)]="cognome"  [disabled]="disabled" matInput placeholder="Cognome ">
+        <input class="input"  matInput placeholder="Cognome "
+        [formControl]="surname"
+        (blur)="updateErrorMessageSurname()"
+        required>
+        @if(surname.invalid){
+          <mat-error>{{errorMessageSurname}}</mat-error>
+        }
       </mat-form-field>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <mat-form-field appearance="outline">
-        <mat-label>Email </mat-label>
-        <input class="input" [(ngModel)]="email "  [disabled]="disabled" matInput placeholder="Email ">
+      <mat-form-field>
+        <mat-label>Email di ateneo</mat-label>
+        <input matInput
+               placeholder="pat@example.com"
+               [formControl]="email"
+               (blur)="updateErrorMessageEmail()"
+               required>
+        @if (email.invalid) {
+          <mat-error>{{errorMessageEmail}}</mat-error>
+        }
       </mat-form-field>
     </div>
     <div class="col">
       <mat-form-field appearance="outline">
         <mat-label>Matricola</mat-label>
-        <input class="input" [(ngModel)]="matricola"  [disabled]="disabled" matInput placeholder="Matricola ">
+        <input class="input" matInput placeholder="Matricola"
+               [formControl]="matricola"
+               (blur)="updateErrorMessageMatricola()">
+        @if(matricola.invalid){
+          <mat-error>{{errorMessageMatricola}}</mat-error>
+        }
       </mat-form-field>
     </div>
   </div>
+  <div class="row" >
+    <div class="col c-btn">
+      <button type="button" class="btn" (click)="saveChanges()"  *ngIf="!name.invalid && !surname.invalid && !email.invalid && !matricola.invalid">Salva</button>
+    </div>
+  </div>
 </div>
-</div>
+
