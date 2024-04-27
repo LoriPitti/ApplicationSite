@@ -81,6 +81,22 @@
 .div-enter:hover .icon-enter{
   color: orange;
 }
+.r-psw{
+  margin-bottom: 0;
+}
+p:hover{
+  transform: scale(1.2);
+  cursor: pointer;
+  color: orange;
+}
+p{
+  transition: 0.6s ease;
+
+}
+
+.r-enter{
+  margin-bottom: 0;
+}
 
 
 

@@ -16,6 +16,9 @@ public interface UserRepo extends JpaRepository<UserDB, Integer> {
   @Query("Select password from UserDB where utente =?1")
   String getPassword(String userame);
 
+  @Query("Select utente from UserDB  where email = ?1")
+  String getUtente(String user);
+
   @Transactional
   @Modifying
   @Query("UPDATE UserDB SET password = ?1 WHERE  utente = ?2")

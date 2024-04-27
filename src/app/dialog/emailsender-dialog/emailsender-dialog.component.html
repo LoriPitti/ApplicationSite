@@ -1,0 +1,23 @@
+
+<h2 mat-dialog-title>
+    Inserisci la mail per il recupero delle credenziali
+</h2>
+<mat-dialog-content>
+  <mat-form-field>
+       <mat-label>Email di ateneo</mat-label>
+       <input matInput
+              placeholder="pat@example.com"
+              [formControl]="email"
+              (blur)="updateErrorMessageEmail()"
+              required>
+       @if (email.invalid) {
+         <mat-error>{{errorMessageEmail}}</mat-error>
+       }
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <div class="col" *ngIf="!email.invalid">
+    <button mat-button mat-dialog-close (click)="sendEmail()">Invia email</button>
+  </div>
+</mat-dialog-actions>

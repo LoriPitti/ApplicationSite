@@ -1,0 +1,50 @@
+.div-body{
+  background-color: grey;
+  padding: 2vh
+}
+.title{
+  background-color: orange;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2vh;
+}
+h2{
+  color: white;
+  font-size: 3vh;
+}
+.content{
+  padding: 2vh;
+  background-color: black;
+}
+.subject{
+  margin-bottom: 4vh;
+  font-style: italic;
+}
+p{
+
+  color: white;
+  font-size: 2vh;
+}
+
+.credenziali{
+  background-color: orange;
+  max-width: 40vh;
+  margin-top: 5vh;
+  padding: 2vh;
+  font-size: 2vh;
+  margin-bottom: 5vh;
+}
+.p-credenziali{
+  margin-top: 2vh;
+  font-size: 3vh;
+}
+
+.p-footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5vh;
+  font-size: 1.5vh;
+}
+

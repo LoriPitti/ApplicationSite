@@ -6,6 +6,9 @@ import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 import {HttpRequestService} from "../service/httpRequest.service";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {ChangePswDialogComponent} from "../dialog/change-psw-dialog/change-psw-dialog.component";
+import {EmailsenderDialogComponent} from "../dialog/emailsender-dialog/emailsender-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-login',
@@ -21,7 +24,8 @@ export class LoginComponent implements  OnInit{
   errorMessageUser = '';
   errorMessagePassword = '';
 
-  constructor(private route:ActivatedRoute, private  router: Router, private http:HttpRequestService, private snackBar:MatSnackBar) {
+  constructor(private route:ActivatedRoute, private  router: Router, private http:HttpRequestService, private snackBar:MatSnackBar,
+              private dialog:MatDialog) {
     merge(this.user.statusChanges, this.user.valueChanges)
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.updateErrorMessageUser());
@@ -78,4 +82,14 @@ export class LoginComponent implements  OnInit{
         break;
     }
   }
+
+
+  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    const dialogRef = this.dialog.open(EmailsenderDialogComponent, {
+      width: '60vh',
+      data: { /* eventuale dato da passare al dialog */ }
+    });
+  }
+
+
 }

@@ -2,6 +2,7 @@ package com.dev.demo.controller;
 
 import com.dev.demo.Entity.Password;
 import com.dev.demo.Entity.User;
+import com.dev.demo.Service.MailService;
 import com.dev.demo.Service.Service;
 import com.dev.demo.exception.UserException;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -66,6 +67,16 @@ public class Controller {
     } catch (UserException e) {
       return ResponseEntity.badRequest().body(e.getMessage());
     }
+  }
+
+  @GetMapping("/user/recovery")
+  public ResponseEntity<String> sendRecoveryEmail(@RequestParam String email){
+   try{
+     service.sendRecoveryEmail(email);
+     return ResponseEntity.ok().body("{\"content\" : \"email sent\"}");
+   } catch (UserException e) {
+       return ResponseEntity.badRequest().body(e.getMessage());
+   }
   }
 }
 

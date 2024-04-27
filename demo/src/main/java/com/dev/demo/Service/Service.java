@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class Service {
   @Autowired
   UserRepo userRepo;
+  @Autowired
+  MailService mailService;
 
   public boolean signup(User user) throws UserException {
     int status = isUserExist(user.utente(), user.email());
@@ -44,5 +46,15 @@ public class Service {
         return userRepo.updatePassword(passwordNew, user) == 1;  //1-> ok
     }else
       throw  new UserException("password errata");
+  }
+
+  public void sendRecoveryEmail(String email) throws UserException {
+    if(isUserExist("",email) == 1){ //1-> mail exist
+        String user = userRepo.getUtente(email);
+        String psw = userRepo.getPassword(user);
+      mailService.sendRecoveryEmail(user, psw, email, "Recupero credenziali");
+    }else{
+      throw new UserException("Email inesistente");
+    }
   }
 }

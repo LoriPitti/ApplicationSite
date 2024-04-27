@@ -34,6 +34,7 @@ import {
 } from "@angular/material/card";
 import { ChangePswDialogComponent } from './dialog/change-psw-dialog/change-psw-dialog.component';
 import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
+import { EmailsenderDialogComponent } from './dialog/emailsender-dialog/emailsender-dialog.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.c
     ApplicationCardComponent,
     ManagementComponent,
     ChangePswDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    EmailsenderDialogComponent
   ],
   imports: [
     BrowserModule,

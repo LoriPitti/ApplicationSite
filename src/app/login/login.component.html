@@ -26,7 +26,7 @@
        </mat-form-field>
      </div>
     </div>
-    <div class="row">
+    <div class="row r-psw">
       <div class="col">
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
@@ -44,11 +44,15 @@
         </mat-form-field>
       </div>
     </div>
+    <div class="row">
+      <div class="col">
+        <div class="div recupero"><p (click)="openDialog('0ms','0ms')">Credenziali dimenticate?</p></div>
+      </div>
+    </div>
     <div class="row r-enter">
         <div *ngIf="!user.invalid && !password.invalid" class="div-enter"  (click)="login()">
           <svg  cIcon name="cilChevronCircleRightAlt" size="sm" class="icon icon-enter" ></svg>
         </div>
-
     </div>
   </div>
   <div class="div-undo" (click)="backToHome()">

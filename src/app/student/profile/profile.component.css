@@ -1,8 +1,8 @@
 
 .container-fluid{
-  border-style: solid;
+  /*border-style: solid;
   border-color: red;
-  border-width: medium;
+  border-width: medium;*/
   margin-bottom: 5vh;
   margin-top: 5vh;
   padding: 2vh 5vh 2vh 5vh;
@@ -11,11 +11,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 2vh;
 }
 .row{
   margin-top: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.r-actions{
+  width: 100%;
+}
 .btn{
   border-style: solid;
   border-color: darkgrey;
@@ -41,4 +48,10 @@ p{
 }
 h2 {
   font-size: 3vh;
+}
+.modify-content{
+  border-style: solid;
+  border-color: darkgrey;
+  border-width: medium;
+  border-radius: 0.5vh;
 }

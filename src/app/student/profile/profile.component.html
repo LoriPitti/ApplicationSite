@@ -9,21 +9,23 @@
       <p></p>
     </mat-card-content>
     <mat-card-actions>
-      <div class="col">
-        <button class="btn" mat-button (click)="modify()" [disabled]="modifyEnabled">Modifica</button>
-      </div>
-      <div class="col">
-        <button class="btn" mat-button (click)="changePassword()" [disabled]="modifyEnabled">Cambia password</button>
-      </div>
-      <div class="col">
+      <div class="row r-actions">
+        <div class="col">
+          <button class="btn" mat-button (click)="modify()" [disabled]="modifyEnabled">Modifica</button>
+        </div>
+        <div class="col">
+          <button class="btn" mat-button (click)="changePassword()" [disabled]="modifyEnabled">Cambia password</button>
+        </div>
+        <div class="col">
           <button mat-button class="btn btl-delete" [disabled]="modifyEnabled">Elimina</button>
-      </div>
+        </div>
 
+      </div>
     </mat-card-actions>
   </mat-card>
   <br>
 </div>
-<div class="container-fluid" *ngIf="modifyEnabled">
+<div class="container-fluid  modify-content" *ngIf="modifyEnabled">
   <div class="row">
     <div class="col c-btn">
       <button type="button" class="btn" (click)="abort()">Annulla</button>

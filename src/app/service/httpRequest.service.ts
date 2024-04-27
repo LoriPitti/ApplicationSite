@@ -56,9 +56,20 @@ export class HttpRequestService{
       map(r=>{
         return r;
       }), catchError((err:HttpErrorResponse) =>{
-        console.log("errore: "+err.error)
         throw new Error((err.error));
       })
+    )
+  }
+
+  sendRecoveryMail(email:string){
+    const params = new HttpParams()
+      .set("email", email);
+   return  this.http.get("http://localhost:8080/user/recovery", {params:params}).pipe(
+      map(r=>{
+        return r;
+      }),catchError((err:HttpErrorResponse)=>{
+        throw new Error((err.error));
+    })
     )
   }
 }

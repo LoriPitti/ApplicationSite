@@ -1,7 +1,6 @@
 .body{
   height: 100vh;
   overflow-x: hidden;
-
 }
 .col{
   height: 100vh;
@@ -66,5 +65,7 @@
 .content{
   width: 100vw;
   max-width: 100vw;
+  overflow-y: scroll;
+  padding: 0 2vh 0 2vh
 }
 
