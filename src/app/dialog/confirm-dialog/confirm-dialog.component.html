@@ -4,8 +4,15 @@
 </div>
 </h2>
 
+<mat-dialog-content>
+  {{data.content}}
+</mat-dialog-content>
+
 <mat-dialog-actions>
+  <div class="col" *ngIf="data.abort">
+    <button mat-button mat-dialog-close >Annulla</button>
+  </div>
   <div class="col">
-    <button mat-button mat-dialog-close >Ok</button>
+    <button mat-button mat-dialog-close (click)="onOkClicked(true)" >Ok</button>
   </div>
 </mat-dialog-actions>

@@ -22,5 +22,6 @@ public class UserDB {
   private String cognome;
   private String email;
   private String password;
+  private int verified = 0;  //0 = false, 1 = true
   private int type; // 0 = user, 1 = admin
 }

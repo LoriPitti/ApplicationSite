@@ -2,6 +2,7 @@ package com.dev.demo.controller;
 
 import com.dev.demo.Entity.Password;
 import com.dev.demo.Entity.User;
+import com.dev.demo.Entity.UserDB;
 import com.dev.demo.Service.MailService;
 import com.dev.demo.Service.Service;
 import com.dev.demo.exception.UserException;
@@ -57,7 +58,6 @@ public class Controller {
   @PostMapping("/user/update/password")
   public ResponseEntity<String> updatePassword(@RequestBody String json) {
     objectMapper = new ObjectMapper();
-    System.out.println("JSON: "+json);
     try {
       Password psw = objectMapper.readValue(json, Password.class);
       service.updatePassword(psw.user(), psw.password(), psw.passwordNew());
@@ -69,14 +69,71 @@ public class Controller {
     }
   }
 
+  @GetMapping("user/data")
+  public ResponseEntity<String> getUserData(@RequestParam String username){
+    System.out.println("Utente"+username);
+      try {
+        UserDB user = service.getUserData(username);
+          return ResponseEntity.ok().body("{\"nome\": \"" + user.getNome() + "\"," +
+            "\"cognome\": \"" + user.getCognome() + "\"," +
+            "\"matricola\": \"" + user.getMatricola() + "\"," +
+            "\"email\": \"" + user.getEmail() + "\"," +
+            "\"password\": \"" + user.getPassword() + "\"," +
+            "\"verified\": \"" + user.getVerified() + "\"" +
+            "}");
+      } catch (UserException e) {
+          return ResponseEntity.badRequest().body(e.getMessage());
+      }
+  }
+
+  @PostMapping("user/data/update")
+  public ResponseEntity<String> updateUserData(@RequestBody String json,
+                                               @RequestParam String bin) {
+    System.out.println("bin"+bin);
+    objectMapper = new ObjectMapper();
+    try {
+      User user = objectMapper.readValue(json, User.class);
+      service.updateData(user.utente(), bin, user.nome(), user.cognome(), user.email(), user.matricola());
+      return ResponseEntity.ok().body("{\"content\" : \"updated\"}");
+    } catch (JsonProcessingException e) {
+      return ResponseEntity.badRequest().body("Errore interno");
+    } catch (UserException e) {
+      return ResponseEntity.badRequest().body(e.getMessage());
+    }
+  }
+
+
+      //----------------------------GESTORE MAIL------------------------------------------------
   @GetMapping("/user/recovery")
   public ResponseEntity<String> sendRecoveryEmail(@RequestParam String email){
    try{
-     service.sendRecoveryEmail(email);
+     service.sendEmail(email,1);
      return ResponseEntity.ok().body("{\"content\" : \"email sent\"}");
    } catch (UserException e) {
        return ResponseEntity.badRequest().body(e.getMessage());
    }
   }
+
+  @GetMapping("/user/confirm/email")
+  public ResponseEntity<String> sendConfirmEmail(@RequestParam String email){
+    try{
+      service.sendEmail(email,2);
+      return ResponseEntity.ok().body("{\"content\" : \"email sent\"}");
+    } catch (UserException e) {
+      return ResponseEntity.badRequest().body(e.getMessage());
+    }
+  }
+
+  @GetMapping("/user/confirm/email/set")
+  public ResponseEntity<String> updateConfirm(@RequestParam String user, @RequestParam int type){
+      try {
+          service.confirmEmail(user);
+          return ResponseEntity.ok().body("{\"content\" : \"updated\"}");
+      } catch (UserException e) {
+          return ResponseEntity.badRequest().body(e.getMessage());
+      }
+  }
+
+
 }
 

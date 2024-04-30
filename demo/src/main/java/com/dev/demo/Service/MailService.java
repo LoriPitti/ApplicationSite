@@ -13,7 +13,7 @@ public class MailService {
   @Autowired
   private JavaMailSender mailSender;
 
-  public void sendRecoveryEmail(String user, String psw, String toEmail, String subject){
+  public void sendEmail(String user, String psw, String name, String toEmail, String subject,int type){
    /* SimpleMailMessage message = new SimpleMailMessage();
     message.setFrom("applications.manager.info@gmail.com");
     message.setTo(toEmail);
@@ -30,80 +30,167 @@ public class MailService {
       helper.setTo(toEmail);
       helper.setSubject(subject);
       // Set the content of the email as HTML with CSS styles
-      String styledBody = "<html>" +
-        "<head>" +
-        "<style>" +
-        ".div-body{" +
-        "background-color: grey;" +
-        "padding: 2vh;" +
-        "}" +
-        ".title{" +
-        "background-color: orange;" +
-        "display: flex;" +
-        "justify-content: center;" +
-        "align-items: center;" +
-        "padding: 2vh;" +
-        "}" +
-        "h2{" +
-        "color: white;" +
-        "font-size: 3vh;" +
-        "}" +
-        ".content{" +
-        "padding: 2vh;" +
-        "background-color: black;" +
-        "}" +
-        ".subject{" +
-        "margin-bottom: 4vh;" +
-        "font-style: italic;" +
-        "}" +
-        "p{" +
-        "color: white;" +
-        "font-size: 2vh;" +
-        "}" +
-        ".credenziali{" +
-        "background-color: orange;" +
-        "max-width: 40vh;" +
-        "margin-top: 5vh;" +
-        "padding: 2vh;" +
-        "font-size: 2vh;" +
-        "margin-bottom: 5vh;" +
-        "}" +
-        ".p-credenziali{" +
-        "margin-top: 2vh;" +
-        "font-size: 2.5vh;" +
-        "}" +
-        ".p-footer{" +
-        "display: flex;" +
-        "justify-content: center;" +
-        "align-items: center;" +
-        "margin-top: 5vh;" +
-        "font-size: 1.5vh;" +
-        "}" +
-        "</style>" +
-        "</head>" +
-        "<body>" +
-        "<div class=\"div-body\">" +
-        "<div class=\"main\">" +
-        "<div class=\"title\"><h2>Applications Manager</h2></div>" +
-        "<div class=\"content\">" +
-        "<p class=\"subject\">Recupero credenziali</p>" +
-        "<p>Ciao Utente,</p>" +
-        "<p>Ecco le tue credenziali per accedere al nostro sito:</p>" +
-        "<div class=\"credenziali\">" +
-        "Username: <p class=\"p-credenziali\">"+user+"</p>" +
-        "Password: <p class=\"p-credenziali\">"+psw+"</p>" +
-        "</div>" +
-        "<p>Tienile memorizzate e al sicuro</p>" +
-        "<p>Per qualsiasi problema, non esistare a contattarci</p>" +
-        "</div>" +
-        "<div class=\"Footer\">" +
-        "<p class=\"p-footer\">Stai ricevendo questa mail perchè hai acconsentito alla ricezione di mail informative da parte di Applications Manager. Rispettiamo la tua privacy e non condivideremo mai i tuoi dati con terze parti senza il tuo consenso.</p>" +
-        "<p class=\"p-footer\">&#64;ApplicationsManager all rights reserved</p>" +
-        "</div>" +
-        "</div>" +
-        "</div>" +
-        "</body>" +
-        "</html>";
+      String styledBody = "";
+      if(type == 1){
+         styledBody = "<html>" +
+          "<head>" +
+          "<style>" +
+          ".div-body{" +
+          "background-color: grey;" +
+          "padding: 2vh;" +
+          "}" +
+          ".title{" +
+          "background-color: orange;" +
+          "display: flex;" +
+          "justify-content: center;" +
+          "align-items: center;" +
+          "padding: 2vh;" +
+          "}" +
+          "h2{" +
+          "color: white;" +
+          "font-size: 3vh;" +
+          "}" +
+          ".content{" +
+          "padding: 2vh;" +
+          "background-color: black;" +
+          "}" +
+          ".subject{" +
+          "margin-bottom: 4vh;" +
+          "font-style: italic;" +
+          "}" +
+          "p{" +
+          "color: white;" +
+          "font-size: 2vh;" +
+          "}" +
+          ".credenziali{" +
+          "background-color: orange;" +
+          "max-width: 40vh;" +
+          "margin-top: 5vh;" +
+          "padding: 2vh;" +
+          "font-size: 2vh;" +
+          "margin-bottom: 5vh;" +
+          "}" +
+          ".p-credenziali{" +
+          "margin-top: 2vh;" +
+          "font-size: 2.5vh;" +
+          "}" +
+          ".p-footer{" +
+          "display: flex;" +
+          "justify-content: center;" +
+          "align-items: center;" +
+          "margin-top: 5vh;" +
+          "font-size: 1.5vh;" +
+          "}" +
+          "</style>" +
+          "</head>" +
+          "<body>" +
+          "<div class=\"div-body\">" +
+          "<div class=\"main\">" +
+          "<div class=\"title\"><h2>Applications Manager</h2></div>" +
+          "<div class=\"content\">" +
+          "<p class=\"subject\">Recupero credenziali</p>" +
+          "<p>Ciao "+name+",</p>" +
+          "<p>Ecco le tue credenziali per accedere al nostro sito:</p>" +
+          "<div class=\"credenziali\">" +
+          "Username: <p class=\"p-credenziali\">"+user+"</p>" +
+          "Password: <p class=\"p-credenziali\">"+psw+"</p>" +
+          "</div>" +
+          "<p>Tienile memorizzate e al sicuro</p>" +
+          "<p>Per qualsiasi problema, non esistare a contattarci</p>" +
+          "</div>" +
+          "<div class=\"Footer\">" +
+          "<p class=\"p-footer\">Stai ricevendo questa mail perchè hai acconsentito alla ricezione di mail informative da parte di Applications Manager. Rispettiamo la tua privacy e non condivideremo mai i tuoi dati con terze parti senza il tuo consenso.</p>" +
+          "<p class=\"p-footer\">&#64;ApplicationsManager all rights reserved</p>" +
+          "</div>" +
+          "</div>" +
+          "</div>" +
+          "</body>" +
+          "</html>";
+      }else{
+         styledBody = "<html>" +
+           "<head>" +
+           "<style>" +
+           ".div-body{" +
+           "background-color: grey;" +
+           "padding: 2vh;" +
+           "}" +
+           ".title{" +
+           "background-color: orange;" +
+           "display: flex;" +
+           "justify-content: center;" +
+           "align-items: center;" +
+           "padding: 2vh;" +
+           "}" +
+           "h2{" +
+           "color: white;" +
+           "font-size: 3vh;" +
+           "}" +
+           ".content{" +
+           "padding: 2vh;" +
+           "background-color: black;" +
+           "}" +
+           ".subject{" +
+           "margin-bottom: 4vh;" +
+           "font-style: italic;" +
+           "}" +
+           "p{" +
+           "color: white;" +
+           "font-size: 2vh;" +
+           "}" +
+           ".credenziali{" +
+           "margin-top: 5vh;" +
+           "padding: 2vh;" +
+           "font-size: 2vh;" +
+           "margin-bottom: 5vh;" +
+           "}" +
+           ".p-credenziali{" +
+           "display: flex;" +
+           "justify-content: center;" +
+           "align-items: center;" +
+           "padding: 2vh;" +
+           "background-color: orange;" +
+           "margin-top: 2vh;" +
+           "font-size: 2vh;" +
+           "}" +
+           ".p-credenziali:hover {" +
+           "color:blue" +
+           "}" +
+           "a{" +
+           "text-decoration: none;" +
+           "}" +
+           ".p-footer{" +
+           "display: flex;" +
+           "justify-content: center;" +
+           "align-items: center;" +
+           "margin-top: 5vh;" +
+           "font-size: 1.5vh;" +
+           "}" +
+           "</style>" +
+           "</head>" +
+           "<body>" +
+           "<div class=\"div-body\">" +
+           "<div class=\"main\">" +
+           "<div class=\"title\"><h2>Applications Manager</h2></div>" +
+           "<div class=\"content\">" +
+           "<p class=\"subject\">Conferma dell'indirizzo email</p>" +
+           "<p>Ciao Utente,</p>" +
+           "<p>per favore clicca sul link sottostante per verificare la tua mail e ricevere aggiornamenti dal nostro sito:</p>" +
+           "<div class=\"credenziali\">" +
+           "<a href=\"http://localhost:4200/student/confirm/email/"+user+"\"><p class=\"p-credenziali\">http://localhost:4200/student/confirm/email/"+user+"</p></a>" +
+           "</div>" +
+           "<p>Cliccando sul link acconsetirai al trattamento dei dati personali, con il solo scopo di utilizzo interno.</p>" +
+           "<p>Per qualsiasi problema, non esistere a contattarci</p>" +
+           "</div>" +
+           "<div class=\"Footer\">" +
+           "<p class=\"p-footer\">Stai ricevendo questa mail perchè hai acconsentito alla ricezione di mail informative da parte di Applications Manager." +
+           " Rispettiamo la tua privacy e non condivideremo mai i tuoi dati con terze parti senza il tuo consenso.</p>" +
+           "<p class=\"p-footer\">&#64;ApplicationsManager all rights reserved</p>" +
+           "</div>" +
+           "</div>" +
+           "</div>" +
+           "</body>" +
+           "</html>";
+      }
       helper.setText(styledBody, true);
 
       mailSender.send(message);

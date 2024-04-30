@@ -61,6 +61,19 @@ export class HttpRequestService{
     )
   }
 
+  getUserData(username:string){
+    console.log("Called to get data")
+    const params = new HttpParams()
+      .set("username", username);
+    return this.http.get<any>("http://localhost:8080/user/data",{params:params}).pipe(
+      map(r=>{
+        return r;
+      }), catchError((err:HttpErrorResponse)=>{
+        throw new Error((err.error));
+      })
+    )
+  }
+
   sendRecoveryMail(email:string){
     const params = new HttpParams()
       .set("email", email);
@@ -71,5 +84,50 @@ export class HttpRequestService{
         throw new Error((err.error));
     })
     )
+  }
+
+  sendConfirmEmail(email:string){
+    const params = new HttpParams()
+      .set("email", email);
+    return  this.http.get("http://localhost:8080/user/confirm/email", {params:params}).pipe(
+      map(r=>{
+        return r;
+      }),catchError((err:HttpErrorResponse)=>{
+        throw new Error((err.error));
+      })
+    )
+  }
+
+  updateComfirmEmail(user:string, type:number){
+    const params = new HttpParams()
+      .set("user", user)
+      .set("type", type);
+    return  this.http.get("http://localhost:8080/user/confirm/email/set", {params:params}).pipe(
+      map(r=>{
+        return r;
+      }),catchError((err:HttpErrorResponse)=>{
+        throw new Error((err.error));
+      })
+    )
+  }
+
+  updateUserData(user:string, nome:string, cognome:string, email:string, matr:number, bin:string){
+    const params = new HttpParams()
+      .set("bin", bin);
+    return this.http.post<any>("http://localhost:8080/user/data/update", {
+      "utente" : user,
+      "matricola" : matr,
+      "nome" : nome,
+      "cognome" : cognome,
+      "email" : email,
+      "password" : ""
+    }, {params:params}).pipe(
+      map(r=>{
+        return r;
+      }), catchError((err:HttpErrorResponse)=>{
+        throw new Error((err.error));
+      })
+    )
+
   }
 }

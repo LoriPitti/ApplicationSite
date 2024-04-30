@@ -8,6 +8,8 @@ import {RegisterComponent} from "./register/register.component";
 import {ProfileComponent} from "./student/profile/profile.component";
 import {PersonalApplicationComponent} from "./student/personal-application/personal-application.component";
 import {ManagementComponent} from "./management/management.component";
+import {ConfirmEmailComponent} from "./confirm-email/confirm-email.component";
+import {confirmEmailGuard} from "./service/guard/auth-guard.guard";
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
@@ -18,7 +20,8 @@ const routes: Routes = [
     ]},
   {path: 'university', component:UniversityComponent},
   {path: 'management', component:ManagementComponent},
-  {path:'register', component:RegisterComponent}
+  {path:'register', component:RegisterComponent},
+  {path:'student/confirm/email/:user', component:ConfirmEmailComponent, canActivate:[confirmEmailGuard]}
 ];
 
 @NgModule({

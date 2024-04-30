@@ -3,6 +3,9 @@ import {MatDialog} from "@angular/material/dialog";
 import {LogoutDialogComponent} from "../dialog/logout-dialog/logout-dialog.component";
 import {ActivatedRoute, Router} from "@angular/router";
 import {relative} from "@angular/compiler-cli";
+import {HttpRequestService} from "../service/httpRequest.service";
+import {UserService} from "../service/user.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-student',
@@ -15,7 +18,8 @@ export class StudentComponent implements OnInit{
   user = '';
 
 
-  constructor(public dialog:MatDialog, private router:Router, private route:ActivatedRoute) {
+  constructor(public dialog:MatDialog, private router:Router, private route:ActivatedRoute, private http:HttpRequestService, private userService:UserService,
+              private snackBar:MatSnackBar) {
   }
   ngOnInit(): void {
     let  user = localStorage.getItem("user");
@@ -24,7 +28,6 @@ export class StudentComponent implements OnInit{
       this.user = '';
     else
       this.user = user;
-
   }
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     const dialogRef = this.dialog.open(LogoutDialogComponent, {
@@ -43,6 +46,8 @@ export class StudentComponent implements OnInit{
     }
       this.router.navigate([component], {relativeTo: this.route})
     }
+
+
 
 
 }

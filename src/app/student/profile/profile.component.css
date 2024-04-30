@@ -55,3 +55,22 @@ h2 {
   border-width: medium;
   border-radius: 0.5vh;
 }
+
+.verify{
+  transition: font-size 0.6s ease;
+}
+.verify:hover{
+  cursor: pointer;
+  font-size: 2.3vh;
+}
+
+.icon{
+  width: 2vh;
+}
+
+.orange{
+  color: orange;
+}
+.green{
+  color: green;
+}

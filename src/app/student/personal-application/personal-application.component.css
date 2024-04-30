@@ -28,16 +28,26 @@ p{
 }
 
 .credenziali{
-  background-color: orange;
-  max-width: 40vh;
   margin-top: 5vh;
   padding: 2vh;
   font-size: 2vh;
   margin-bottom: 5vh;
 }
 .p-credenziali{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2vh;
+  background-color: orange;
   margin-top: 2vh;
-  font-size: 3vh;
+  font-size: 2vh;
+}
+.p-credenziali:hover {
+  color:blue
+}
+
+a{
+  text-decoration: none;
 }
 
 .p-footer{

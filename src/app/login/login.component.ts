@@ -9,6 +9,7 @@ import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 import {ChangePswDialogComponent} from "../dialog/change-psw-dialog/change-psw-dialog.component";
 import {EmailsenderDialogComponent} from "../dialog/emailsender-dialog/emailsender-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {UserService} from "../service/user.service";
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,7 @@ export class LoginComponent implements  OnInit{
   errorMessagePassword = '';
 
   constructor(private route:ActivatedRoute, private  router: Router, private http:HttpRequestService, private snackBar:MatSnackBar,
-              private dialog:MatDialog) {
+              private dialog:MatDialog, private userService: UserService) {
     merge(this.user.statusChanges, this.user.valueChanges)
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.updateErrorMessageUser());

@@ -1,10 +1,15 @@
 <div class="container-fluid">
   <mat-card>
     <mat-card-header>
-      <mat-card-title><h2>{{nome}} {{cognome}}</h2></mat-card-title>
+      <mat-card-title><h2>{{nome}} {{cognome}}   <svg *ngIf="verified == 1" cIcon name="cilCheckCircle" size="sm" class="icon green" id="personalIcon"></svg></h2>
+
+      </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p>{{mail}}</p>
+      <p>{{mail}} &nbsp;<a  *ngIf="verified == 0" class="verify" (click)="sendEmail()">Verifica</a>
+        &nbsp;
+        <svg *ngIf="verified == 0" cIcon name="cilWarning" size="sm" class="icon orange" id="personalIcon"></svg>
+      </p>
       <p>{{matr}}</p>
       <p></p>
     </mat-card-content>

@@ -35,6 +35,7 @@ import {
 import { ChangePswDialogComponent } from './dialog/change-psw-dialog/change-psw-dialog.component';
 import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
 import { EmailsenderDialogComponent } from './dialog/emailsender-dialog/emailsender-dialog.component';
+import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { EmailsenderDialogComponent } from './dialog/emailsender-dialog/emailsen
     ManagementComponent,
     ChangePswDialogComponent,
     ConfirmDialogComponent,
-    EmailsenderDialogComponent
+    EmailsenderDialogComponent,
+    ConfirmEmailComponent,
   ],
   imports: [
     BrowserModule,

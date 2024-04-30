@@ -1,0 +1,4 @@
+Nome : Applications
+Cognome: Manager
+mail: applications.manager.info@gmail.com
+psw: App.INFO.manager@001
