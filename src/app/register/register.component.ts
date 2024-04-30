@@ -135,8 +135,8 @@ export class RegisterComponent {
   confirm() {
     this.http.signup(this.user.value, this.email.value, this.name.value, this.surname.value, this.matricola.value, this.password.value).subscribe({
       next: (response: any) => {
-        if(this.email.value)
-          localStorage.setItem('username', this.email.value);
+        if(this.user.value)
+          localStorage.setItem('user', this.user.value);
         this.router.navigate(["student"]);
       },
       error: (error) => {

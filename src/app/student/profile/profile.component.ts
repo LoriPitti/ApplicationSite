@@ -11,6 +11,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {error} from "@angular/compiler-cli/src/transformers/util";
 import {UserService} from "../../service/user.service";
 import {ConfirmDialogComponent} from "../../dialog/confirm-dialog/confirm-dialog.component";
+import {ConfirmDeleteDialogComponent} from "../../dialog/confirm-delete-dialog/confirm-delete-dialog.component";
 
 
 @Component({
@@ -138,6 +139,7 @@ export class ProfileComponent implements OnInit{
 
   } //checking parameters changed to save
 
+
   private openDialogConfirm(enterAnimationDuration: string, exitAnimationDuration: string, content:string): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '60vh',
@@ -210,6 +212,39 @@ export class ProfileComponent implements OnInit{
       }
     })
   } //contact server to get users parameter
+
+  deleteUserAccount(){
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '60vh',
+      data: { message: 'Attenzione, stai per eliminare l\'account: ', content: 'sei sicuro di volerlo fare? ogni tuo dato andrà perso definitivamente!', abort: true}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == true){
+      this.openConfirmDialog();
+      }
+    });
+  }
+
+  openConfirmDialog(){
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent, {
+      width: '60vh',
+      data: {username:this.username}
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result == true){
+        this.http.deleteUser(this.username).subscribe({
+          next:(r)=>{
+            localStorage.clear();
+            this.router.navigate([""]);
+          },error:(err)=>{
+            this.snackBar.open(err, 'Chiudi', {duration: 5000});
+          }
+        })
+      }else{
+        this.snackBar.open('Password errata', 'Chiudi', {duration:5000});
+      }
+    });
+  }
 
 
 }

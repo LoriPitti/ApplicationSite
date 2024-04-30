@@ -128,6 +128,29 @@ export class HttpRequestService{
         throw new Error((err.error));
       })
     )
+  }
 
+  deleteUser(user:string){
+    const params = new HttpParams()
+      .set("user", user);
+    return this.http.delete<any>("http://localhost:8080/user/delete", {params:params}).pipe(
+      map(r=>{
+        return r;
+      }),catchError((err:HttpErrorResponse) =>{
+        throw new Error(err.error);
+      })
+    )
+  }
+  verifyToken(user:string, token:string){
+    const params = new HttpParams()
+      .set("user",user)
+      .set("token", token);
+    return this.http.get<any>("http://localhost:8080/user/token/verify", {params:params}).pipe(
+      map(r=>{
+        return r;
+      }),catchError((err:HttpErrorResponse)=>{
+        throw new Error((err.error));
+      } )
+    )
   }
 }

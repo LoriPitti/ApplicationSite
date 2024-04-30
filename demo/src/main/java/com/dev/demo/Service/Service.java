@@ -1,10 +1,15 @@
 package com.dev.demo.Service;
 
+import com.dev.demo.Entity.Token;
 import com.dev.demo.Entity.User;
 import com.dev.demo.Entity.UserDB;
 import com.dev.demo.exception.UserException;
+import com.dev.demo.repository.TokenRepo;
 import com.dev.demo.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.security.SecureRandom;
+import java.util.Base64;
 
 @org.springframework.stereotype.Service
 public class Service {
@@ -12,6 +17,8 @@ public class Service {
   UserRepo userRepo;
   @Autowired
   MailService mailService;
+  @Autowired
+  TokenRepo tokenRepo;
 
   public boolean signup(User user) throws UserException {
     int status = isUserExist(user.utente(), user.email());
@@ -82,6 +89,13 @@ public class Service {
 
   }
 
+  public void deleteUser(String user) throws UserException {
+    if(isUserExist(user, "")==2){
+      userRepo.deleteById(userRepo.getUserId(user));
+    }else
+      throw new UserException("Utente inesistente");
+
+  }
   //---------------------------------------GESTORE MAIL..............................
 
   public void sendEmail(String email, int type) throws UserException {
@@ -89,10 +103,18 @@ public class Service {
         String user = userRepo.getUtente(email);
         String psw = userRepo.getPassword(user);
         String name = userRepo.getNome(user);
+        String token = "";
         if(type == 1)
-            mailService.sendEmail(user, psw, name, email, "Recupero credenziali", 1);
-        else
-          mailService.sendEmail(user, psw, name, email, "Conferma l'email", 2);
+            mailService.sendEmail(user, psw, name, email, "Recupero credenziali", 1, "");
+        else {
+          if(!tokenRepo.existsByUser(user)){ //utente senza token
+             token = generateToken();
+            tokenRepo.save(new Token(0, user,token));
+          }else {
+             token = tokenRepo.getToken(user);
+          }
+          mailService.sendEmail(user, psw, name, email, "Conferma l'email", 2, token);
+        }
     }else{
       throw new UserException("Email inesistente");
     }
@@ -100,8 +122,24 @@ public class Service {
   public void confirmEmail(String user) throws UserException {
     if(isUserExist(user, "") == 2){
         userRepo.updateVerified(1, user);
+        tokenRepo.deleteById(tokenRepo.getTokenId(user));
     }
     else
       throw new UserException("utente inesistente");
+  }
+
+  //------------------------------------------TOKEN-------------------
+  private String generateToken(){
+    SecureRandom secureRandom = new SecureRandom();
+    byte[] tokenBytes = new byte[32]; // Lunghezza del token in byte
+    secureRandom.nextBytes(tokenBytes);
+    return Base64.getUrlEncoder().withoutPadding().encodeToString(tokenBytes);
+  }
+
+  public boolean verifyToken(String user, String token) throws UserException {
+    if(isUserExist(user,"") == 2){
+        return tokenRepo.getToken(user).equals(token);
+    }else
+      throw new UserException("Utente inesistente");
   }
 }

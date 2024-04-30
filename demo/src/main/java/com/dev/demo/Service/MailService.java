@@ -13,7 +13,7 @@ public class MailService {
   @Autowired
   private JavaMailSender mailSender;
 
-  public void sendEmail(String user, String psw, String name, String toEmail, String subject,int type){
+  public void sendEmail(String user, String psw, String name, String toEmail, String subject,int type, String token){
    /* SimpleMailMessage message = new SimpleMailMessage();
     message.setFrom("applications.manager.info@gmail.com");
     message.setTo(toEmail);
@@ -21,7 +21,7 @@ public class MailService {
     message.setSubject(subject);
     mailSender.send(message);*/
 
-    System.out.println("USer:"+user + "psw "+psw + " email: "+toEmail);
+    System.out.println("User:"+user + "psw "+psw + " email: "+toEmail);
 
     MimeMessage message = mailSender.createMimeMessage();
     MimeMessageHelper helper = new MimeMessageHelper(message, "utf-8");
@@ -176,7 +176,7 @@ public class MailService {
            "<p>Ciao Utente,</p>" +
            "<p>per favore clicca sul link sottostante per verificare la tua mail e ricevere aggiornamenti dal nostro sito:</p>" +
            "<div class=\"credenziali\">" +
-           "<a href=\"http://localhost:4200/student/confirm/email/"+user+"\"><p class=\"p-credenziali\">http://localhost:4200/student/confirm/email/"+user+"</p></a>" +
+          "<a href=\"http://localhost:4200/student/confirm/email/" + user + "?token=" + token + "\"><p class=\"p-credenziali\">Clicca per confermare</p></a>"+
            "</div>" +
            "<p>Cliccando sul link acconsetirai al trattamento dei dati personali, con il solo scopo di utilizzo interno.</p>" +
            "<p>Per qualsiasi problema, non esistere a contattarci</p>" +

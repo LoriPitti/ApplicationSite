@@ -21,7 +21,7 @@ const routes: Routes = [
   {path: 'university', component:UniversityComponent},
   {path: 'management', component:ManagementComponent},
   {path:'register', component:RegisterComponent},
-  {path:'student/confirm/email/:user', component:ConfirmEmailComponent, canActivate:[confirmEmailGuard]}
+  {path:'student/confirm/email/:user', component:ConfirmEmailComponent, /*canActivate:[confirmEmailGuard]*/}
 ];
 
 @NgModule({

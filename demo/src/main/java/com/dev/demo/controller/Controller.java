@@ -102,6 +102,16 @@ public class Controller {
     }
   }
 
+  @DeleteMapping("/user/delete")
+  public ResponseEntity<String> deleteUser(@RequestParam String user){
+      try {
+          service.deleteUser(user);
+          return ResponseEntity.ok().body("{\"content\": \"deleted\"}");
+      } catch (UserException e) {
+          return ResponseEntity.badRequest().body(e.getMessage());
+      }
+  }
+
 
       //----------------------------GESTORE MAIL------------------------------------------------
   @GetMapping("/user/recovery")
@@ -133,6 +143,21 @@ public class Controller {
           return ResponseEntity.badRequest().body(e.getMessage());
       }
   }
+
+  //-----------------------------TOKEN VERIFICATION------------------------------------------------
+  @GetMapping("user/token/verify")
+  public ResponseEntity<String> verifyToken(@RequestParam String user,
+                                            @RequestParam String token){
+      try {
+        if(service.verifyToken(user, token))
+          return ResponseEntity.ok().body("{\"content\":\"validToken\"}");
+        else
+          return ResponseEntity.badRequest().body("invalid token");
+      } catch (UserException e) {
+          return ResponseEntity.badRequest().body(e.getMessage());
+      }
+  }
+
 
 
 }

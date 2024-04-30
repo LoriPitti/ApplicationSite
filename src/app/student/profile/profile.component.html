@@ -22,7 +22,7 @@
           <button class="btn" mat-button (click)="changePassword()" [disabled]="modifyEnabled">Cambia password</button>
         </div>
         <div class="col">
-          <button mat-button class="btn btl-delete" [disabled]="modifyEnabled">Elimina</button>
+          <button mat-button class="btn btl-delete" [disabled]="modifyEnabled" (click)="deleteUserAccount()">Elimina</button>
         </div>
 
       </div>

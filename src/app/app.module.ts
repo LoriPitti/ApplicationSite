@@ -36,6 +36,7 @@ import { ChangePswDialogComponent } from './dialog/change-psw-dialog/change-psw-
 import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.component';
 import { EmailsenderDialogComponent } from './dialog/emailsender-dialog/emailsender-dialog.component';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
+import { ConfirmDeleteDialogComponent } from './dialog/confirm-delete-dialog/confirm-delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
     ConfirmDialogComponent,
     EmailsenderDialogComponent,
     ConfirmEmailComponent,
+    ConfirmDeleteDialogComponent,
   ],
   imports: [
     BrowserModule,
