@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface TokenRepo extends JpaRepository<Token, Integer> {
 
-  @Query("Select token from Token where user = ?1")
+  @Query("Select token from Token where utente = ?1")
   String getToken(String user);
-  @Query("select id from Token where user = ?1" )
+  @Query("select id from Token where utente = ?1" )
   int getTokenId(String username);
 
-  boolean  existsByUser(String user);
+  boolean  existsByUtente(String utente);
 
 }

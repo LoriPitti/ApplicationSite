@@ -83,7 +83,7 @@ public class Service {
         if(isUserExist(user, email) == 1)
           throw new UserException("Email già esistente");
         userRepo.updateEmail(email,user);
-        userRepo.updateVerified(0, email);
+        userRepo.updateVerified(0, user);
       }
     }else throw new UserException("Utente inesistente");
 
@@ -107,7 +107,7 @@ public class Service {
         if(type == 1)
             mailService.sendEmail(user, psw, name, email, "Recupero credenziali", 1, "");
         else {
-          if(!tokenRepo.existsByUser(user)){ //utente senza token
+          if(!tokenRepo.existsByUtente(user)){ //utente senza token
              token = generateToken();
             tokenRepo.save(new Token(0, user,token));
           }else {
@@ -122,7 +122,7 @@ public class Service {
   public void confirmEmail(String user) throws UserException {
     if(isUserExist(user, "") == 2){
         userRepo.updateVerified(1, user);
-        tokenRepo.deleteById(tokenRepo.getTokenId(user));
+       // tokenRepo.deleteById(tokenRepo.getTokenId(user));
     }
     else
       throw new UserException("utente inesistente");

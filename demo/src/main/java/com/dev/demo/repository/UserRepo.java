@@ -31,8 +31,8 @@ public interface UserRepo extends JpaRepository<UserDB, Integer> {
 
   @Transactional
   @Modifying
-  @Query("UPDATE UserDB SET verified = ?1 WHERE  email = ?2")
-  void updateVerified(int verified, String email);
+  @Query("UPDATE UserDB SET verified = ?1 WHERE  utente = ?2")
+  void updateVerified(int verified, String utente);
 
   @Transactional
   @Modifying
