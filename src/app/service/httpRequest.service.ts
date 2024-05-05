@@ -5,14 +5,69 @@ import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Injectable({providedIn:'root'})
 export class HttpRequestService{
-   private httpOptions = {headers: new HttpHeaders({
-      'Accept' : 'application/json',
-      'Content-Type' : 'application/json'
-    })};
+
   constructor(private http:HttpClient) {
   }
-  signup(user: string | null, email: string | null , name: string | null, surname: string | null, matricola: string | null, password: string | null){
 
+  private getHeader(){
+      const authToken = localStorage.getItem("token");
+      if(authToken){
+        return new HttpHeaders({
+          'Authorization': `Bearer ${authToken}`,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        })
+      }else
+        return new HttpHeaders({
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        });
+
+  }
+
+
+  //-------------------------------------------ADMIN-------------------------------------------------------------
+  adminLogin(admin:string, password:string){
+    const params = new HttpParams()
+      .set("admin", admin)
+      .set("password", password);
+    return this.http.get<any>("http://localhost:8080/admin/login", {params: params, headers: this.getHeader() }).pipe(
+      map (r =>{
+        return r;
+      }),catchError((err: HttpErrorResponse )=> {
+        throw new Error(err.error);
+      })
+    )
+  }
+  getAdminData(admin:string){
+    const params = new HttpParams()
+      .set("username", admin);
+    return this.http.get<any>("http://localhost:8080/admin/data",{params:params, headers: this.getHeader()}).pipe(
+      map(r=>{
+        return r;
+      }), catchError((err:HttpErrorResponse)=>{
+        throw new Error((err.error));
+      })
+    )
+  }
+
+  updateAdminData(admin:string,surname:string, cell:string,  bin:string){
+    const params = new HttpParams()
+      .set("admin", admin)
+      .set("cognome", surname)
+      .set("cell", cell)
+      .set("bin", bin);
+    return this.http.get<any>("http://localhost:8080/admin/data/update",
+    {params:params, headers:this.getHeader()}).pipe(
+      map(r=>{
+        return r;
+      }), catchError((err:HttpErrorResponse)=>{
+        throw new Error((err.error));
+      })
+    )
+  }
+  //-------------------------------------------USER-------------------------
+  signup(user: string | null, email: string | null , name: string | null, surname: string | null, matricola: string | null, password: string | null){
 
     return this.http.post<string>("http://localhost:8080/signup", {
       'utente' : user,
@@ -21,7 +76,7 @@ export class HttpRequestService{
       'cognome' : surname,
       'email' : email,
       'password' : password
-    }, this.httpOptions).pipe(
+    }, {headers: this.getHeader()}).pipe(
       map(r=> {
         return r
       }),
@@ -35,10 +90,7 @@ export class HttpRequestService{
     const params = new HttpParams()
       .set("username", user)
       .set("password", password);
-    return this.http.get<string>("http://localhost:8080/login", {params: params, headers:new HttpHeaders({
-        'Accept' : 'application/json',
-        'Content-Type' : 'application/json'
-      }) }).pipe(
+    return this.http.get<any>("http://localhost:8080/login", {params: params, headers: this.getHeader() }).pipe(
       map (r =>{
         return r;
       }),catchError((err: HttpErrorResponse )=> {
@@ -52,7 +104,7 @@ export class HttpRequestService{
       "user" : user,
       "password" : password,
       "passwordNew" : passwordNew
-    }).pipe(
+    }, {headers: this.getHeader()}).pipe(
       map(r=>{
         return r;
       }), catchError((err:HttpErrorResponse) =>{
@@ -65,7 +117,7 @@ export class HttpRequestService{
     console.log("Called to get data")
     const params = new HttpParams()
       .set("username", username);
-    return this.http.get<any>("http://localhost:8080/user/data",{params:params}).pipe(
+    return this.http.get<any>("http://localhost:8080/user/data",{params:params, headers: this.getHeader()}).pipe(
       map(r=>{
         return r;
       }), catchError((err:HttpErrorResponse)=>{
@@ -77,7 +129,7 @@ export class HttpRequestService{
   sendRecoveryMail(email:string){
     const params = new HttpParams()
       .set("email", email);
-   return  this.http.get("http://localhost:8080/user/recovery", {params:params}).pipe(
+   return  this.http.get("http://localhost:8080/user/recovery", {params:params, headers: this.getHeader()}).pipe(
       map(r=>{
         return r;
       }),catchError((err:HttpErrorResponse)=>{
@@ -89,7 +141,7 @@ export class HttpRequestService{
   sendConfirmEmail(email:string){
     const params = new HttpParams()
       .set("email", email);
-    return  this.http.get("http://localhost:8080/user/confirm/email", {params:params}).pipe(
+    return  this.http.get("http://localhost:8080/user/confirm/email", {params:params, headers:this.getHeader()}).pipe(
       map(r=>{
         return r;
       }),catchError((err:HttpErrorResponse)=>{
@@ -102,7 +154,7 @@ export class HttpRequestService{
     const params = new HttpParams()
       .set("user", user)
       .set("type", type);
-    return  this.http.get("http://localhost:8080/user/confirm/email/set", {params:params}).pipe(
+    return  this.http.get("http://localhost:8080/user/confirm/email/set", {params:params, headers:this.getHeader()}).pipe(
       map(r=>{
         return r;
       }),catchError((err:HttpErrorResponse)=>{
@@ -121,7 +173,7 @@ export class HttpRequestService{
       "cognome" : cognome,
       "email" : email,
       "password" : ""
-    }, {params:params}).pipe(
+    }, {params:params, headers:this.getHeader()}).pipe(
       map(r=>{
         return r;
       }), catchError((err:HttpErrorResponse)=>{
@@ -133,7 +185,7 @@ export class HttpRequestService{
   deleteUser(user:string){
     const params = new HttpParams()
       .set("user", user);
-    return this.http.delete<any>("http://localhost:8080/user/delete", {params:params}).pipe(
+    return this.http.delete<any>("http://localhost:8080/user/delete", {params:params, headers:this.getHeader()}).pipe(
       map(r=>{
         return r;
       }),catchError((err:HttpErrorResponse) =>{
@@ -145,7 +197,7 @@ export class HttpRequestService{
     const params = new HttpParams()
       .set("user",user)
       .set("token", token);
-    return this.http.get<any>("http://localhost:8080/user/token/verify", {params:params}).pipe(
+    return this.http.get<any>("http://localhost:8080/user/token/verify", {params:params, headers:this.getHeader()}).pipe(
       map(r=>{
         return r;
       }),catchError((err:HttpErrorResponse)=>{

@@ -37,6 +37,7 @@ import { ConfirmDialogComponent } from './dialog/confirm-dialog/confirm-dialog.c
 import { EmailsenderDialogComponent } from './dialog/emailsender-dialog/emailsender-dialog.component';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 import { ConfirmDeleteDialogComponent } from './dialog/confirm-delete-dialog/confirm-delete-dialog.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { ConfirmDeleteDialogComponent } from './dialog/confirm-delete-dialog/con
     EmailsenderDialogComponent,
     ConfirmEmailComponent,
     ConfirmDeleteDialogComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@ import {
   cilChevronCircleRightAlt,
   cilEducation,
   cilFindInPage,
-  cilIndustry,
+  cilIndustry, cilPlaylistAdd, cilStorage,
   cilUser, cilUserPlus, cilWarning, cilXCircle
 } from "@coreui/icons";
 
@@ -22,6 +22,6 @@ export class AppComponent {
 
   constructor(public iconSet:IconSetService) {
     iconSet.icons = {cilEducation, cilUser, cilIndustry, cilActionUndo,cilChevronCircleRightAlt,cilApps,cilFindInPage,
-      cilAccountLogout, cilUserPlus,cilCheckCircle, cilXCircle, cilWarning, cilBarChart}
+      cilAccountLogout, cilUserPlus,cilCheckCircle, cilXCircle, cilWarning, cilBarChart,cilPlaylistAdd,cilStorage}
   }
 }

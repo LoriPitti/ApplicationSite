@@ -1,8 +1,6 @@
 package com.dev.demo.controller;
 
-import com.dev.demo.Entity.Password;
-import com.dev.demo.Entity.User;
-import com.dev.demo.Entity.UserDB;
+import com.dev.demo.Entity.*;
 import com.dev.demo.Service.MailService;
 import com.dev.demo.Service.Service;
 import com.dev.demo.exception.UserException;
@@ -22,7 +20,63 @@ public class Controller {
   Service service;
   private ObjectMapper objectMapper;
 
-  //--------------------USER METHOD-----------------------------------
+  //--------------------------------------ADMIN SECTION---------------------
+  @PostMapping("/admin/add")
+  public ResponseEntity<String> addAmin(@RequestBody String json){
+    objectMapper = new ObjectMapper();
+    try {
+      Admin admin = objectMapper.readValue(json, Admin.class);
+      System.out.println("Controller: ricevuto");
+      if (service.addAdmin(admin))
+        return ResponseEntity.ok().body("{\"content\" : \"Admin aggiunto\"}");
+    } catch (JsonProcessingException e) {
+      return ResponseEntity.badRequest().body("Errore interno");
+    } catch (UserException e) {
+      return ResponseEntity.badRequest().body(e.getMessage());
+    }
+    return ResponseEntity.badRequest().body("Errore sconosciuto");
+  }
+
+  @GetMapping("/admin/login")
+  public ResponseEntity<String> adminLogin(@RequestParam String admin, @RequestParam String password) {
+    try {
+      String token = service.adminLogin(admin, password);
+      if (!token.isEmpty()) {
+        return ResponseEntity.ok().body("{\"content\" : \""+token+"\"}");
+      } else
+        return ResponseEntity.badRequest().body("Password errata");
+    } catch (UserException e) {
+      return ResponseEntity.badRequest().body("Admin inesistente");
+    }
+  }
+
+  @GetMapping("/admin/data")
+  public ResponseEntity<String> getAdminData(@RequestParam String username){
+    try {
+      AdminDB admin = service.getAdminData(username);
+      return ResponseEntity.ok().body(
+        "{\"cognome\": \"" + admin.getCognome() + "\"," +
+        "\"cell\": \"" + admin.getCell() + "\"" +
+        "}");
+    } catch (UserException e) {
+      return ResponseEntity.badRequest().body(e.getMessage());
+    }
+  }
+  @GetMapping("/admin/data/update")
+  public ResponseEntity<String> updateAdminData(@RequestParam String admin,
+                                                @RequestParam String cognome,
+                                                @RequestParam String cell,
+                                                @RequestParam String bin){
+    try{
+      service.updateAdminData(admin, cognome, cell, bin);
+      return ResponseEntity.ok().body("{\"content\" : \"Dati aggiornati\"}");
+    }catch (UserException e){
+      return ResponseEntity.badRequest().body(e.getMessage());
+    }catch (Exception e) {
+      return ResponseEntity.badRequest().body("Errore sconosiuto");
+    }
+  }
+  //---------------------------------------------------USER METHOD-----------------------------------
   @PostMapping("/signup")
   public ResponseEntity<String> signup(@RequestBody String json) {
     objectMapper = new ObjectMapper();
@@ -44,10 +98,10 @@ public class Controller {
 
   @GetMapping("/login")
   public ResponseEntity<String> login(@RequestParam String username, @RequestParam String password) {
-    System.out.println("us : " + username + " ps: " + password);
     try {
-      if (service.login(username, password)) {
-        return ResponseEntity.ok().body("{\"content\" : \"log\"}");
+      String token = service.login(username, password);
+      if (!token.isEmpty()) {
+        return ResponseEntity.ok().body("{\"content\" : \""+token+"\"}");
       } else
         return ResponseEntity.badRequest().body("Password errata");
     } catch (UserException e) {

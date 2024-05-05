@@ -21,7 +21,7 @@
         <div class="col">
           <button class="btn" mat-button (click)="changePassword()" [disabled]="modifyEnabled">Cambia password</button>
         </div>
-        <div class="col">
+        <div class="col" *ngIf="type == 'student'">
           <button mat-button class="btn btl-delete" [disabled]="modifyEnabled" (click)="deleteUserAccount()">Elimina</button>
         </div>
 
@@ -37,7 +37,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col ">
+    <div class="col " *ngIf="type == 'student'">
       <mat-form-field appearance="outline">
         <mat-label>Nome </mat-label>
         <input class="input"  matInput placeholder="Nome "
@@ -63,7 +63,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col">
+    <div class="col" *ngIf="type == 'student'">
       <mat-form-field>
         <mat-label>Email di ateneo</mat-label>
         <input matInput
@@ -76,7 +76,7 @@
         }
       </mat-form-field>
     </div>
-    <div class="col">
+    <div class="col" *ngIf="type == 'student'">
       <mat-form-field appearance="outline">
         <mat-label>Matricola</mat-label>
         <input class="input" matInput placeholder="Matricola"
@@ -87,10 +87,24 @@
         }
       </mat-form-field>
     </div>
+    <div class="col" *ngIf="type == 'management'">
+      <mat-form-field appearance="outline">
+        <mat-label>Cellulare</mat-label>
+        <input class="input" matInput placeholder="Cellulare"
+               [formControl]="cell"
+               (blur)="updateErrorMessageCell()">
+        @if(cell.invalid){
+          <mat-error>{{errorMessageCell}}</mat-error>
+        }
+      </mat-form-field>
+    </div>
   </div>
   <div class="row" >
-    <div class="col c-btn">
+    <div class="col c-btn" *ngIf="type == 'student'">
       <button type="button" class="btn" (click)="saveChanges()"  *ngIf="!name.invalid && !surname.invalid && !email.invalid && !matricola.invalid">Salva</button>
+    </div>
+    <div class="col c-btn" *ngIf="type == 'management'">
+      <button type="button" class="btn" (click)="saveAdminChanges()"  *ngIf="!surname.invalid && !cell.invalid">Salva</button>
     </div>
   </div>
 </div>

@@ -20,9 +20,11 @@ import {ConfirmDeleteDialogComponent} from "../../dialog/confirm-delete-dialog/c
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent implements OnInit{
+  type = '';
   username = '';
   cognome: string = '';
-  nome: string = ''
+  nome: string = '';
+  cellulare ='';
   disabled = false;
   mail = ''
   matr = ''
@@ -35,10 +37,13 @@ export class ProfileComponent implements OnInit{
   password = new FormControl('', );
   email = new FormControl(this.mail, [Validators.required, Validators.email]);
   matricola = new FormControl('', [Validators.pattern('^[0-9]*$')]);
+  cell = new FormControl('', [Validators.required,Validators.pattern('^[0-9]*$')]);
   errorMessageSurname ='';
   errorMessageName = '';
   errorMessageEmail = '';
   errorMessageMatricola = '';
+  errorMessageCell = '';
+
   binaryString = '';
 
   constructor(private router:Router, public dialog:MatDialog, private http:HttpRequestService, private snackBar:MatSnackBar, private userService: UserService){
@@ -57,10 +62,27 @@ export class ProfileComponent implements OnInit{
     merge(this.matricola.statusChanges, this.matricola.valueChanges)
       .pipe(takeUntilDestroyed())
       .subscribe(() => this.updateErrorMessageMatricola());
+
+    merge(this.cell.statusChanges, this.cell.valueChanges)
+      .pipe(takeUntilDestroyed())
+      .subscribe(() => this.updateErrorMessageCell());
   }
 
   ngOnInit(): void {
-    this.getUserData();
+    const v = localStorage.getItem("verified");
+    if(v == null)
+      this.verified = 0;
+    else
+      this.verified = parseInt(v);
+    const type = localStorage.getItem("type");
+    if(type == null)
+      this.type = '';
+    else
+      this.type = type;
+    if(this.type === 'student')
+       this.getUserData();
+    else if(this.type ==='management')
+      this.getAdminData();
   }
   updateErrorMessageEmail() {
     if (this.email.hasError('required')) {
@@ -91,6 +113,19 @@ export class ProfileComponent implements OnInit{
       this.errorMessageMatricola = '';
     } else {
       this.errorMessageMatricola = '';
+    }
+  }
+
+  updateErrorMessageCell() {
+    if (this.cell.hasError('required')){
+      this.errorMessageCell= 'Il campo è obbligatorio';
+    }
+    else if (this.cell.hasError('pattern') && this.cell.value !== '') {
+      this.errorMessageCell= 'Il campo deve essere numerico';
+
+    } else {
+      this.errorMessageCell = '';
+      this.cell.setErrors(null); // Rimuovi eventuali errori precedentemente impostati
     }
   }
 
@@ -139,6 +174,26 @@ export class ProfileComponent implements OnInit{
 
   } //checking parameters changed to save
 
+  saveAdminChanges() {
+    let bin = '';
+    let content = '';
+    if (this.surname.value != this.cognome) {
+      content += 'cognome ';
+      bin +='1';
+    }else
+      bin += '0';
+    if (this.cell.value != this.cellulare) {
+      content += 'cellulare';
+      bin += '1';
+    }else
+      bin+='0';
+    this.binaryString = bin;
+    if (content != '')
+      this.openDialogConfirm('2ms', '1ms', content)
+    else
+      this.snackBar.open('Non stai modificando nessun campo','Chiudi', {duration: 5000})
+  }
+
 
   private openDialogConfirm(enterAnimationDuration: string, exitAnimationDuration: string, content:string): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -152,6 +207,7 @@ export class ProfileComponent implements OnInit{
         let surname = this.surname.value;
         let email = this.email.value;
         let matricola = this.matricola.value;
+        let cellulare = this.cell.value;
         if(name == null)
           name = '';
         if(surname == null)
@@ -160,14 +216,27 @@ export class ProfileComponent implements OnInit{
           email = '';
         if(matricola == null)
           matricola = '0';
-        this.http.updateUserData(this.username, name, surname,email ,parseInt(matricola) , this.binaryString).subscribe({
-          next:(result)=>{
-            this.snackBar.open("Parametri aggiornati", 'Chiudi', {duration: 5000});
-            location.reload();
-          },error:(err)=>{
-            this.snackBar.open(err, 'Chiudi', {duration: 5000});
-          }
-        })
+        if(cellulare == null)
+          cellulare = '0';
+        if(this.type == 'student'){
+          this.http.updateUserData(this.username, name, surname,email ,parseInt(matricola) , this.binaryString).subscribe({
+            next:(result)=>{
+              this.snackBar.open("Parametri aggiornati", 'Chiudi', {duration: 5000});
+              location.reload();
+            },error:(err)=>{
+              this.snackBar.open(err, 'Chiudi', {duration: 5000});
+            }
+          })
+        }else if(this.type == 'management'){
+          this.http.updateAdminData(this.username, surname, cellulare,  this.binaryString).subscribe({
+            next:(result)=>{
+              this.snackBar.open(result.content, 'Chiudi', {duration: 5000});
+              location.reload();
+            },error:(err)=>{
+              this.snackBar.open(err, 'Chiudi', {duration: 5000});
+            }
+          })
+        }
       }
     });
   }
@@ -198,7 +267,7 @@ export class ProfileComponent implements OnInit{
       next:(response)=> {
         this.nome=response.nome;
         this.cognome=response.cognome;
-        this.mail = response.email
+        this.mail = response.email;
         this.matr = response.matricola;
         this.verified = response.verified;
         localStorage.setItem("verified", this.verified.toString());
@@ -212,6 +281,25 @@ export class ProfileComponent implements OnInit{
       }
     })
   } //contact server to get users parameter
+
+  getAdminData(){
+    let admin = localStorage.getItem("admin");
+    if(admin == null)
+      admin = '';
+    this.username = admin;
+    this.http.getAdminData(admin).subscribe({
+      next:(response)=> {
+        this.cognome=response.cognome;
+        this.cellulare = response.cell;
+        localStorage.setItem("verified", '1');
+
+        this.surname = new FormControl(this.cognome,[Validators.required]);
+        this.cell = new FormControl(this.cellulare, [Validators.required, Validators.email]);
+      },error:(error)=>{
+        this.snackBar.open(error, 'Chiudi', {duration: 5000})
+      }
+    })
+  } //contact server to get admin parameter
 
   deleteUserAccount(){
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
@@ -245,6 +333,7 @@ export class ProfileComponent implements OnInit{
       }
     });
   }
+
 
 
 }

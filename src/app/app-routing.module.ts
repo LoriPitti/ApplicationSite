@@ -10,6 +10,7 @@ import {PersonalApplicationComponent} from "./student/personal-application/perso
 import {ManagementComponent} from "./management/management.component";
 import {ConfirmEmailComponent} from "./confirm-email/confirm-email.component";
 import {confirmEmailGuard} from "./service/guard/auth-guard.guard";
+import {AdminComponent} from "./admin/admin.component";
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
@@ -21,7 +22,10 @@ const routes: Routes = [
   {path: 'university', component:UniversityComponent},
   {path: 'management', component:ManagementComponent},
   {path:'register', component:RegisterComponent},
-  {path:'student/confirm/email/:user', component:ConfirmEmailComponent, /*canActivate:[confirmEmailGuard]*/}
+  {path:'student/confirm/email/:user', component:ConfirmEmailComponent, /*canActivate:[confirmEmailGuard]*/},
+  {path: 'admin', component:AdminComponent, children:[
+      {path: 'profile', component: ProfileComponent}
+    ]}
 ];
 
 @NgModule({

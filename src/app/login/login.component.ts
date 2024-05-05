@@ -74,16 +74,33 @@ export class LoginComponent implements  OnInit{
           psw = this.password.value;
           this.http.login(username, psw).subscribe({
             next: (response)=>{
-              localStorage.setItem("user", username);                    //<-- localstorage
+              localStorage.setItem("user", username);
+              localStorage.setItem("token", response.content)//<-- localstorage
               this.router.navigate(["student"]);
             },error: (error) => {
               this.snackBar.open(error, 'Chiudi', {duration: 2000})
             }
           })
         break;
+      case 'management':
+        let admin = '';
+        let password = '';
+        if(this.user.value)
+          admin = this.user.value;
+        if(this.password.value)
+          password = this.password.value;
+        this.http.adminLogin(admin, password).subscribe({
+          next: (response)=>{
+            localStorage.setItem("admin", admin);
+            localStorage.setItem("token", response.content)//<-- localstorage
+            this.router.navigate(["admin"]);
+          },error: (error) => {
+            this.snackBar.open(error, 'Chiudi', {duration: 2000})
+          }
+        })
+        break;
     }
   }
-
 
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     const dialogRef = this.dialog.open(EmailsenderDialogComponent, {
