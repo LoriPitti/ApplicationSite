@@ -43,6 +43,17 @@ export class AdminComponent implements OnInit{
         break;
       case 'myapplication':
         this.title = 'Candidature';
+        break;
+      case 'newApplication':
+        this.title = 'Aggiungi una nuova candidatura';
+        break;
+      case 'addAdmin':
+        this.title = 'Aggiungi un nuovo admin';
+        break;
+      case 'storage':
+        this.title = 'Monitora le candidature pubblicate';
+        break;
+
     }
     this.router.navigate([component], {relativeTo: this.route})
   }

@@ -5,6 +5,7 @@ import com.dev.demo.Service.MailService;
 import com.dev.demo.Service.Service;
 import com.dev.demo.exception.UserException;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +77,20 @@ public class Controller {
       return ResponseEntity.badRequest().body("Errore sconosiuto");
     }
   }
+  @PostMapping("/admin/application/add")
+  public ResponseEntity<String> addNewApplication(@RequestBody String json){
+    objectMapper = new ObjectMapper();
+    try {
+      Application application = objectMapper.readValue(json, Application.class);
+      return ResponseEntity.ok().body("{\"content\" : \"Application registrata\"}");
+    }catch (JsonMappingException e) {
+        return ResponseEntity.badRequest().body("Errore del server");
+    } catch (Exception e){
+      return  ResponseEntity.badRequest().body("Errore sconosciuto");
+    }
+
+  }
+
   //---------------------------------------------------USER METHOD-----------------------------------
   @PostMapping("/signup")
   public ResponseEntity<String> signup(@RequestBody String json) {

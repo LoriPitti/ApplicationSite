@@ -38,6 +38,12 @@ import { EmailsenderDialogComponent } from './dialog/emailsender-dialog/emailsen
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
 import { ConfirmDeleteDialogComponent } from './dialog/confirm-delete-dialog/confirm-delete-dialog.component';
 import { AdminComponent } from './admin/admin.component';
+import { NewApplicationComponent } from './admin/new-application/new-application.component';
+import {MatOption, MatSelect} from "@angular/material/select";
+import {MatRadioButton, MatRadioGroup, MatRadioModule} from "@angular/material/radio";
+import { MapComponent } from './map/map.component';
+import { AddAdminComponent } from './admin/add-admin/add-admin.component';
+import { StorageComponent } from './admin/storage/storage.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +65,10 @@ import { AdminComponent } from './admin/admin.component';
     ConfirmEmailComponent,
     ConfirmDeleteDialogComponent,
     AdminComponent,
+    NewApplicationComponent,
+    MapComponent,
+    AddAdminComponent,
+    StorageComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +90,12 @@ import { AdminComponent } from './admin/admin.component';
     MatCardTitle,
     MatCardHeader,
     MatCardActions,
-    MatCardContent
+    MatCardContent,
+    MatSelect,
+    MatOption,
+    MatRadioGroup,
+    MatRadioButton,
+    MatRadioModule
   ],
   providers: [
     provideAnimationsAsync(),

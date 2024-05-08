@@ -1,0 +1,232 @@
+<div class="container-fluid">
+  <div class="row">
+    <mat-card>
+      <mat-card-title><h2>Dipartimento</h2></mat-card-title>
+      <mat-card-content>
+       <div class="row r">
+         <div class="col">
+           <mat-form-field>
+             <mat-label>Già inseriti</mat-label>
+             <mat-select [disabled]="isDropDownDipDisabled">
+               @for (d of dipartimento; track d) {
+                 <mat-option [value]="d.valueOf">{{d}}</mat-option>
+               }
+             </mat-select>
+           </mat-form-field>
+         </div>
+         <div class="col">
+           <mat-form-field appearance="outline">
+             <mat-label>Nome </mat-label>
+             <input  class="input"  matInput placeholder="Nome "
+                    [formControl]="nomeDipartimento"
+                    (blur)="updateErrorMessageDipartimento()"
+                    required>
+             @if(nomeDipartimento.invalid){
+               <mat-error>{{errorMessageNomeDip}}</mat-error>
+             }
+           </mat-form-field>
+         </div>
+       </div>
+        <div class="row">
+          <mat-radio-group aria-label="Select an option">
+          <div class="row">
+            <div class="col">
+              <mat-radio-button value="1" (click)="enableDropDown('dip')">Già esistente</mat-radio-button>
+            </div>
+            <div class="col">
+              <mat-radio-button value="2" (click)="enableInput('dip')">Nuovo</mat-radio-button>
+            </div>
+          </div>
+          </mat-radio-group>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="row r">
+    <mat-card>
+      <mat-card-title><h2>Area geografica</h2></mat-card-title>
+      <mat-card-content>
+        <div class="row r">
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Già inserita</mat-label>
+              <mat-select [disabled]="isDropDownAreaDisabled">
+                @for (d of area; track d) {
+                  <mat-option [value]="d.valueOf">{{d}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Nome </mat-label>
+              <input  class="input"  matInput placeholder="Nome "
+                      [formControl]="nomeArea"
+                      (blur)="updateErrorMessageArea()"
+                      required>
+              @if(nomeArea.invalid){
+                <mat-error>{{errorMessageNomeArea}}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <mat-radio-group aria-label="Select an option">
+            <div class="row">
+              <div class="col">
+                <mat-radio-button value="1" (click)="enableDropDown('area')">Già esistente</mat-radio-button>
+              </div>
+              <div class="col">
+                <mat-radio-button value="2" (click)="enableInput('area')">Nuovo</mat-radio-button>
+              </div>
+            </div>
+          </mat-radio-group>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="row r">
+    <mat-card>
+      <mat-card-title><h2>Nazione</h2></mat-card-title>
+      <mat-card-content>
+        <div class="row r">
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Già inserita</mat-label>
+              <mat-select [disabled]="isDropDownNazDisabled">
+                @for (d of nazione; track d) {
+                  <mat-option [value]="d.valueOf">{{d}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Nome </mat-label>
+              <input  class="input"  matInput placeholder="Nome "
+                      [formControl]="nomeNazione"
+                      (blur)="updateErrorMessageNazione()"
+                      required>
+              @if(nomeNazione.invalid){
+                <mat-error>{{errorMessageNomeNazione}}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <mat-radio-group aria-label="Select an option">
+            <div class="row">
+              <div class="col">
+                <mat-radio-button value="1" (click)="enableDropDown('naz')">Già esistente</mat-radio-button>
+              </div>
+              <div class="col">
+                <mat-radio-button value="2" (click)="enableInput('naz')">Nuovo</mat-radio-button>
+              </div>
+            </div>
+          </mat-radio-group>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="row r">
+    <mat-card>
+      <mat-card-title><h2>Università</h2></mat-card-title>
+      <mat-card-content>
+        <div class="row r">
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Già inserita</mat-label>
+              <mat-select [disabled]="isDropDownUniDisabled">
+                @for (d of dipartimento; track d) {
+                  <mat-option [value]="d.valueOf">{{d}}</mat-option>
+                }
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Nome </mat-label>
+              <input  class="input"  matInput placeholder="Nome "
+                      [formControl]="nomeUniversita"
+                      (blur)="updateErrorMessageUni()"
+                      required>
+              @if(nomeUniversita.invalid){
+                <mat-error>{{errorMessageNomeUni}}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <mat-radio-group aria-label="Select an option">
+            <div class="row">
+              <div class="col">
+                <mat-radio-button value="1" (click)="enableDropDown('uni')">Già esistente</mat-radio-button>
+              </div>
+              <div class="col">
+                <mat-radio-button value="2" (click)="enableInput('uni')">Nuovo</mat-radio-button>
+              </div>
+            </div>
+          </mat-radio-group>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="row r">
+    <mat-card>
+      <mat-card-title><h2>Corso</h2></mat-card-title>
+      <mat-card-content>
+        <div class="row r">
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Nome corso </mat-label>
+              <input  class="input"  matInput placeholder="Nome "
+                      [formControl]="nomeUniversita"
+                      (blur)="updateErrorMessageUni()"
+                      required>
+              @if(nomeUniversita.invalid){
+                <mat-error>{{errorMessageNomeUni}}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="outline">
+              <mat-label>Link </mat-label>
+              <input  class="input"  matInput placeholder="Nome "
+                      [formControl]="link"
+                      (blur)="updateErrorMessageLink()"
+                      required>
+              @if(link.invalid){
+                <mat-error>{{errorMessageLink}}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-radio-group aria-label="Select an option">
+              <div class="row">
+                <mat-radio-button value="1" (click)="setType(0)">Triennale/Bechelor</mat-radio-button>
+              </div>
+              <mat-radio-button value="2" (click)="setType(1)">Magistrale/Master</mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="row r-btn">
+    <div class="col c-btn" >
+      <div class="div  option" (click)="insert()">
+        <div class="col-2">
+          <svg  cIcon name="cilPlaylistAdd" size="sm" class="icon"></svg>
+        </div>
+        <div class="col-8">
+          <h2 class="h2_btn">Inserisci</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

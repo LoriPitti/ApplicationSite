@@ -11,6 +11,9 @@ import {ManagementComponent} from "./management/management.component";
 import {ConfirmEmailComponent} from "./confirm-email/confirm-email.component";
 import {confirmEmailGuard} from "./service/guard/auth-guard.guard";
 import {AdminComponent} from "./admin/admin.component";
+import {NewApplicationComponent} from "./admin/new-application/new-application.component";
+import {AddAdminComponent} from "./admin/add-admin/add-admin.component";
+import {StorageComponent} from "./admin/storage/storage.component";
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
@@ -24,7 +27,10 @@ const routes: Routes = [
   {path:'register', component:RegisterComponent},
   {path:'student/confirm/email/:user', component:ConfirmEmailComponent, /*canActivate:[confirmEmailGuard]*/},
   {path: 'admin', component:AdminComponent, children:[
-      {path: 'profile', component: ProfileComponent}
+      {path: 'profile', component: ProfileComponent},
+      {path: 'newApplication', component: NewApplicationComponent},
+      {path: 'addAdmin', component: AddAdminComponent},
+      {path: 'storage', component: StorageComponent}
     ]}
 ];
 

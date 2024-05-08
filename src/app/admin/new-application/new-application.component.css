@@ -1,0 +1,57 @@
+.container-fluid{
+  /*border-style: solid;
+  border-color: red;
+  border-width: medium;*/
+  margin-bottom: 5vh;
+  margin-top: 5vh;
+  padding: 2vh 5vh 2vh 5vh;
+}
+mat-card{
+  padding: 2vh  0 2vh 0;
+}
+.r{
+  margin-top: 5vh;
+}
+
+h2 {
+  font-size: 3vh;
+  padding-left: 2vh;
+}
+.option{
+  border-color: darkgrey;
+  border-style: solid;
+  border-width: thin;
+  border-radius: 0.5vh;
+  width: 35vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  padding: 0;
+  transition: 0.5s ease-out;
+}
+.option:hover{
+  cursor: pointer;
+  transform: scale(1.1);
+  background-color: orange;
+}
+
+.icon{
+  width: 6vh;
+}
+
+.r-btn{
+  display: flex;
+  justify-content: center;
+  margin-top: 3vh;
+}
+.c-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.h2_btn{
+  margin-top: 1vh;
+  margin-left: 2vh;
+}

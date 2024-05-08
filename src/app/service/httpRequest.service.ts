@@ -66,6 +66,22 @@ export class HttpRequestService{
       })
     )
   }
+  addNewApplication(dip:string, area:string, nazione:string, uni:string, corso:string,  type:number, lik:string ){
+    return this.http.post<any>("http://localhost:8080/admin/application/add", {
+      "dip" : dip,
+      "area" : area,
+      "nazione" : nazione,
+      "uni" : uni,
+      "url" : lik,
+      "type" : type
+    }).pipe(
+      map(response =>{
+        return response;
+      }),catchError((err:HttpErrorResponse) =>{
+        return err.error;
+    })
+    )
+  }
   //-------------------------------------------USER-------------------------
   signup(user: string | null, email: string | null , name: string | null, surname: string | null, matricola: string | null, password: string | null){
 
