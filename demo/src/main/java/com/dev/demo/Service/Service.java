@@ -1,13 +1,13 @@
 package com.dev.demo.Service;
 
 import com.dev.demo.Entity.*;
+import com.dev.demo.exception.UniversityException;
 import com.dev.demo.exception.UserException;
-import com.dev.demo.repository.AdminRepo;
-import com.dev.demo.repository.TokenRepo;
-import com.dev.demo.repository.UserRepo;
+import com.dev.demo.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.io.UncheckedIOException;
 import java.security.SecureRandom;
 import java.util.Base64;
 
@@ -21,6 +21,10 @@ public class Service {
   TokenRepo tokenRepo;
   @Autowired
   AdminRepo adminRepo;
+  @Autowired
+  DipartimentoRepo dipartimentoRepo;
+  @Autowired
+  UniversityRepo universityRepo;
 
 //------------------------------ADMIN---------------------------------------------------
 public boolean addAdmin(Admin admin) throws UserException {
@@ -70,6 +74,23 @@ public boolean addAdmin(Admin admin) throws UserException {
     }else throw new UserException("Admin inesistente");
 
   }
+
+
+  public boolean addApplication(Application application) throws UniversityException {
+  if(!dipartimentoRepo.existsByUniversity(application.uni())) { //Se non esiste aggiungilo prima nel dipartimento
+    dipartimentoRepo.save(new Dipartimento(0, application.dip(), application.area(), application.nazione(), application.uni()));
+    universityRepo.save(new University(0, application.uni(), application.type(), application.corso(), application.url(), ""));
+    return true;
+  }else { //altrimenti aggiungilo solo all'uni
+      if(!universityRepo.existsByLink(application.url())){
+        universityRepo.save(new University(0, application.uni(), application.type(), application.corso(), application.url(), ""));
+        return true;
+      }else
+        throw new UniversityException("Link già esistente");
+  }
+
+
+}
   //--------------------------------------------  USER.----------------------
   public boolean signup(User user) throws UserException {
     int status = isUserExist(user.utente(), user.email());

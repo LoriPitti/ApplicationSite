@@ -20,7 +20,6 @@ import { RegisterComponent } from './register/register.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { ProfileComponent } from './student/profile/profile.component';
 import { PersonalApplicationComponent } from './student/personal-application/personal-application.component';
-import { ApplicationCardComponent } from './student/personal-application/application-card/application-card.component';
 import {HttpClientModule} from "@angular/common/http";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import { ManagementComponent } from './management/management.component';
@@ -44,6 +43,9 @@ import {MatRadioButton, MatRadioGroup, MatRadioModule} from "@angular/material/r
 import { MapComponent } from './map/map.component';
 import { AddAdminComponent } from './admin/add-admin/add-admin.component';
 import { StorageComponent } from './admin/storage/storage.component';
+import { ModifyApplicationsComponent } from './admin/modify-applications/modify-applications.component';
+import { ApplicationCardComponent } from './application-card/application-card.component';
+import {MatExpansionPanelActionRow} from "@angular/material/expansion";
 
 @NgModule({
   declarations: [
@@ -57,7 +59,6 @@ import { StorageComponent } from './admin/storage/storage.component';
     RegisterComponent,
     ProfileComponent,
     PersonalApplicationComponent,
-    ApplicationCardComponent,
     ManagementComponent,
     ChangePswDialogComponent,
     ConfirmDialogComponent,
@@ -68,7 +69,9 @@ import { StorageComponent } from './admin/storage/storage.component';
     NewApplicationComponent,
     MapComponent,
     AddAdminComponent,
-    StorageComponent
+    StorageComponent,
+    ModifyApplicationsComponent,
+    ApplicationCardComponent
   ],
   imports: [
     BrowserModule,
@@ -95,7 +98,8 @@ import { StorageComponent } from './admin/storage/storage.component';
     MatOption,
     MatRadioGroup,
     MatRadioButton,
-    MatRadioModule
+    MatRadioModule,
+    MatExpansionPanelActionRow
   ],
   providers: [
     provideAnimationsAsync(),

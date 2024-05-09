@@ -17,5 +17,5 @@ public class Dipartimento {
   private String nome;
   private String areaGeo;
   private String nazione;
-  private String univerity;
+  private String university;
 }

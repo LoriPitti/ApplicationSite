@@ -3,6 +3,7 @@ package com.dev.demo.controller;
 import com.dev.demo.Entity.*;
 import com.dev.demo.Service.MailService;
 import com.dev.demo.Service.Service;
+import com.dev.demo.exception.UniversityException;
 import com.dev.demo.exception.UserException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -82,10 +83,13 @@ public class Controller {
     objectMapper = new ObjectMapper();
     try {
       Application application = objectMapper.readValue(json, Application.class);
+      service.addApplication(application);
       return ResponseEntity.ok().body("{\"content\" : \"Application registrata\"}");
     }catch (JsonMappingException e) {
         return ResponseEntity.badRequest().body("Errore del server");
-    } catch (Exception e){
+    } catch (UniversityException e){
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }catch (Exception e){
       return  ResponseEntity.badRequest().body("Errore sconosciuto");
     }
 

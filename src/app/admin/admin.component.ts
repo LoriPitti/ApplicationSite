@@ -53,6 +53,9 @@ export class AdminComponent implements OnInit{
       case 'storage':
         this.title = 'Monitora le candidature pubblicate';
         break;
+      case 'modify':
+        this.title = 'Modifica le candidature';
+        break;
 
     }
     this.router.navigate([component], {relativeTo: this.route})

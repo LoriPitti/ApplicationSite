@@ -70,6 +70,7 @@ export class HttpRequestService{
     return this.http.post<any>("http://localhost:8080/admin/application/add", {
       "dip" : dip,
       "area" : area,
+      "corso" : corso,
       "nazione" : nazione,
       "uni" : uni,
       "url" : lik,
@@ -78,7 +79,7 @@ export class HttpRequestService{
       map(response =>{
         return response;
       }),catchError((err:HttpErrorResponse) =>{
-        return err.error;
+        throw  new Error(err.error);
     })
     )
   }

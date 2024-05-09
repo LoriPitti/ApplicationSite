@@ -4,7 +4,7 @@ import {
   cilAccountLogout,
   cilActionUndo,
   cilApps, cilBarChart, cilCheckCircle,
-  cilChevronCircleRightAlt,
+  cilChevronCircleRightAlt, cilColorBorder,
   cilEducation,
   cilFindInPage,
   cilIndustry, cilPlaylistAdd, cilStorage,
@@ -22,6 +22,6 @@ export class AppComponent {
 
   constructor(public iconSet:IconSetService) {
     iconSet.icons = {cilEducation, cilUser, cilIndustry, cilActionUndo,cilChevronCircleRightAlt,cilApps,cilFindInPage,
-      cilAccountLogout, cilUserPlus,cilCheckCircle, cilXCircle, cilWarning, cilBarChart,cilPlaylistAdd,cilStorage}
+      cilAccountLogout, cilUserPlus,cilCheckCircle, cilXCircle, cilWarning, cilBarChart,cilPlaylistAdd,cilStorage,cilColorBorder}
   }
 }

@@ -16,7 +16,7 @@ public class University {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private int id;
   private String nome;
-  private boolean tipo; //0 bechelor, 1 master //TODO eventuali magistrali a ciclo unic
+  private int tipo; //0 bechelor, 1 master //TODO eventuali magistrali a ciclo unic
   private String corso;
   private String link;
   private String descrizione;

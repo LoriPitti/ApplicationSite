@@ -14,6 +14,7 @@ import {AdminComponent} from "./admin/admin.component";
 import {NewApplicationComponent} from "./admin/new-application/new-application.component";
 import {AddAdminComponent} from "./admin/add-admin/add-admin.component";
 import {StorageComponent} from "./admin/storage/storage.component";
+import {ModifyApplicationsComponent} from "./admin/modify-applications/modify-applications.component";
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
@@ -30,7 +31,8 @@ const routes: Routes = [
       {path: 'profile', component: ProfileComponent},
       {path: 'newApplication', component: NewApplicationComponent},
       {path: 'addAdmin', component: AddAdminComponent},
-      {path: 'storage', component: StorageComponent}
+      {path: 'storage', component: StorageComponent},
+      {path: 'modify', component: ModifyApplicationsComponent}
     ]}
 ];
 
